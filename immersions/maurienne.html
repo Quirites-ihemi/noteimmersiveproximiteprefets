@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les bus France services — Maurienne</title>
+<style>
+:root {
+  --bg: #04080d;
+  --gold: #c9ab72;
+  --soft: #eef4f7;
+  --muted: #c9d5dd;
+  --line: rgba(255,255,255,.14)
+}
+* {
+  box-sizing: border-box
+}
+body,
+html {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  color: #fff;
+  overflow: hidden
+}
+body {
+  font-family: Georgia,"Times New Roman",serif
+}
+.film {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #02060a;
+  overflow: hidden
+}
+.scene {
+  position: absolute;
+  inset: -2%;
+  opacity: 0;
+  transition: opacity 3.6s ease-in-out;
+  background-size: cover;
+  background-position: center center;
+  transform: scale(1.04);
+  will-change: opacity,transform
+}
+.scene.active {
+  opacity: 1
+}
+.scene-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,rgba(3,7,11,.38) 0,rgba(3,7,11,.08) 28%,rgba(3,7,11,.16) 58%,rgba(3,7,11,.74) 100%),radial-gradient(circle at center,rgba(255,255,255,0) 42%,rgba(0,0,0,.24) 100%)
+}
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  opacity: .08;
+  mix-blend-mode: screen;
+  background-image: radial-gradient(circle at 20% 30%,rgba(255,255,255,.8) 0,rgba(255,255,255,0) 1px),radial-gradient(circle at 70% 75%,rgba(255,255,255,.7) 0,rgba(255,255,255,0) 1px),radial-gradient(circle at 40% 60%,rgba(255,255,255,.6) 0,rgba(255,255,255,0) 1px);
+  background-size: 3px 3px,4px 4px,5px 5px
+}
+.letterbox-bottom,
+.letterbox-top {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 6vh;
+  z-index: 11;
+  pointer-events: none;
+  background: linear-gradient(180deg,rgba(0,0,0,.92),rgba(0,0,0,.34),rgba(0,0,0,0))
+}
+.letterbox-top {
+  top: 0
+}
+.letterbox-bottom {
+  bottom: 0;
+  transform: rotate(180deg)
+}
+.hud {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  pointer-events: none
+}
+.topline {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  font-family: Arial,Helvetica,sans-serif
+}
+.titleblock small {
+  display: block;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #d8e6ee;
+  margin-bottom: 10px
+}
+.titleblock h1 {
+  margin: 0;
+  font-weight: 500;
+  text-shadow: 0 2px 18px rgba(0,0,0,.25)
+}
+.titleblock .sub {
+  margin-top: 14px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: .05em
+}
+.steps {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  margin-top: 10px
+}
+.step {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  opacity: .78;
+  transition: opacity .6s,transform .6s;
+  transform: translateY(0)
+}
+.step.current {
+  opacity: 1
+}
+.pin {
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 16px
+}
+.steptext {
+  line-height: 1.32;
+  color: #eef5f9
+}
+.steptext b {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 3px;
+  color: #fff
+}
+.statblock {
+  position: absolute;
+  z-index: 12;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  pointer-events: none
+}
+.statline {
+  width: 1px;
+  height: 92px;
+  background: rgba(201,171,114,.75)
+}
+.stattext .num {
+  line-height: .9;
+  font-weight: 700;
+  color: #fff
+}
+.caption {
+  position: absolute;
+  z-index: 5;
+  border-radius: 18px;
+  background: linear-gradient(180deg,rgba(6,13,20,.1),rgba(6,13,20,.52));
+  border: 1px solid rgba(255,255,255,.09);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 18px 42px rgba(0,0,0,.16)
+}
+.caption.left {
+  left: 32px
+}
+.caption.right {
+  right: 32px
+}
+.cap-kicker {
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: #d8ecf6;
+  margin-bottom: 10px
+}
+.caption h2 {
+  margin: 0 0 10px;
+  font-weight: 500
+}
+.caption p {
+  margin: 0;
+  font-family: Arial,Helvetica,sans-serif;
+  color: #edf4f7
+}
+.intro {
+  position: absolute;
+  inset: 0;
+  z-index: 14;
+  display: flex;
+  align-items: flex-end;
+  padding: 32px;
+  transition: opacity .8s,visibility .8s
+}
+.intro.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none
+}
+.intro-card small {
+  display: block;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #deedf4;
+  margin-bottom: 12px
+}
+.intro-card h2 {
+  margin: 0 0 10px;
+  font-weight: 500
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center
+}
+button {
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 14px 22px;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  transition: transform .15s,opacity .15s,background .15s
+}
+button:hover {
+  transform: translateY(-1px)
+}
+.play {
+  background: #f0f8fb;
+  color: #082231;
+  box-shadow: 0 10px 28px rgba(0,0,0,.28)
+}
+.ghost {
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.16)
+}
+.status {
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 13px;
+  color: #d8e5ec
+}
+.progress-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  z-index: 15;
+  background: rgba(255,255,255,.08)
+}
+.progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#7fc0df,#efe2bb);
+  box-shadow: 0 0 18px rgba(164,220,244,.45)
+}
+.scene[data-motion=wideTerritory] {
+  animation: 11s ease-in-out infinite alternate wideTerritory
+}
+.scene[data-motion=zoomVillage] {
+  animation: 11s ease-in-out infinite alternate zoomVillage
+}
+.scene[data-motion=approachBus] {
+  animation: 11s ease-in-out infinite alternate approachBus
+}
+.scene[data-motion=insideBus] {
+  animation: 11s ease-in-out infinite alternate insideBus
+}
+.scene[data-motion=formsClose] {
+  animation: 11s ease-in-out infinite alternate formsClose
+}
+.scene[data-motion=screenDetail] {
+  animation: 11s ease-in-out infinite alternate screenDetail
+}
+@keyframes wideTerritory {
+  from {
+    transform: scale(1.03) translateX(-.8%);
+    background-position: 50% 44%
+  }
+  to {
+    transform: scale(1.16) translateX(.8%);
+    background-position: 54% 55%
+  }
+}
+@keyframes zoomVillage {
+  from {
+    transform: scale(1.02) translateY(.6%);
+    background-position: 50% 44%
+  }
+  to {
+    transform: scale(1.17) translateY(-.8%);
+    background-position: 53% 56%
+  }
+}
+@keyframes approachBus {
+  from {
+    transform: scale(1.02);
+    background-position: 48% 52%
+  }
+  to {
+    transform: scale(1.15);
+    background-position: 54% 48%
+  }
+}
+@keyframes insideBus {
+  from {
+    transform: scale(1.03) translateX(.6%);
+    background-position: 50% 50%
+  }
+  to {
+    transform: scale(1.12) translateX(-.6%);
+    background-position: 54% 48%
+  }
+}
+@keyframes formsClose {
+  from {
+    transform: scale(1.04);
+    background-position: 52% 48%
+  }
+  to {
+    transform: scale(1.18);
+    background-position: 47% 52%
+  }
+}
+@keyframes screenDetail {
+  from {
+    transform: scale(1.04);
+    background-position: 46% 48%
+  }
+  to {
+    transform: scale(1.16);
+    background-position: 54% 52%
+  }
+}
+@media (max-width:1100px) {
+  .steps {
+    max-width: 48vw;
+    gap: 16px
+  }
+  .steptext {
+    display: none
+  }
+  .caption {
+    max-width: min(72vw,580px)
+  }
+}
+@media (max-width:800px) {
+  .topline {
+    flex-direction: column;
+    gap: 14px
+  }
+  .steps {
+    gap: 10px
+  }
+  .caption {
+    left: 16px!important;
+    right: 16px!important;
+    bottom: 13vh;
+    max-width: none
+  }
+  .statblock {
+    left: 18px;
+    bottom: 12vh;
+    max-width: 78vw
+  }
+  .stattext .num {
+    font-size: 46px
+  }
+  .stattext .desc {
+    font-size: 15px
+  }
+  .intro {
+    padding: 18px
+  }
+  .intro-card p {
+    font-size: 18px
+  }
+  .letterbox-bottom,
+  .letterbox-top {
+    height: 4.2vh
+  }
+}
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap
+}
+.play {
+  font-size: 1.08rem!important;
+  padding: 18px 28px!important;
+  font-weight: 800!important;
+  letter-spacing: .01em;
+  box-shadow: 0 18px 36px rgba(0,0,0,.24)
+}
+.ghost {
+  font-size: .98rem!important;
+  padding: 14px 20px!important
+}
+.intro-card {
+  max-width: 620px!important
+}
+.intro-card p {
+  margin: 0 0 22px;
+  color: #ebf3f7;
+  font-size: 20px!important
+}
+.topline .titleblock h1 {
+  font-size: clamp(24px,3.6vw,54px)!important;
+  max-width: 7ch
+}
+.steps {
+  gap: 18px!important
+}
+.stattext {
+  font-family: Arial,Helvetica,sans-serif;
+  text-shadow: 0 2px 8px rgba(0,0,0,.22);
+  max-width: 310px!important
+}
+.stattext .num {
+  font-size: 44px!important
+}
+.stattext .desc {
+  margin-top: 8px;
+  line-height: 1.35;
+  color: #eef4f7;
+  font-size: 16px!important
+}
+.controls {
+  flex-wrap: wrap!important;
+  gap: 10px!important
+}
+.intro {
+  align-items: flex-end!important;
+  justify-content: flex-start!important;
+  padding: clamp(24px,4vw,46px)!important;
+  background: linear-gradient(180deg,rgba(5,11,17,.62) 0,rgba(5,11,17,.42) 42%,rgba(5,11,17,.88) 100%)!important
+}
+.intro-card {
+  max-width: min(680px,86vw)!important;
+  padding: 24px 26px!important;
+  border-radius: 24px!important;
+  background: linear-gradient(180deg,rgba(5,12,19,.62),rgba(5,12,19,.8))!important;
+  border: 1px solid rgba(255,255,255,.12)!important;
+  box-shadow: 0 24px 60px rgba(0,0,0,.28)!important
+}
+.intro-card h2 {
+  font-size: clamp(40px,5.4vw,72px)!important;
+  line-height: .96!important;
+  margin-bottom: 12px!important
+}
+.intro-card p {
+  max-width: 42ch!important;
+  font-size: clamp(16px,1.45vw,21px)!important;
+  line-height: 1.45!important
+}
+.controls .play {
+  font-size: 1.12rem!important;
+  padding: 18px 30px!important;
+  font-weight: 900!important
+}
+.controls .ghost {
+  padding: 14px 18px!important
+}
+.hud {
+  opacity: 0!important;
+  transition: opacity .45s!important
+}
+.film.playing .hud {
+  opacity: 1!important
+}
+.topline {
+  top: 16px!important;
+  left: 24px!important;
+  right: 24px!important;
+  gap: 18px!important;
+  align-items: flex-start!important
+}
+.titleblock h1 {
+  font-size: clamp(28px,4vw,58px)!important;
+  line-height: .95!important;
+  max-width: 7.5ch!important
+}
+.titleblock .sub {
+  font-size: clamp(12px,1vw,16px)!important;
+  max-width: 28ch!important;
+  line-height: 1.25!important
+}
+.steps {
+  display: flex!important;
+  gap: 16px!important;
+  max-width: 50vw!important
+}
+.steptext {
+  max-width: 13ch!important;
+  font-size: 11px!important
+}
+.pin {
+  width: 28px!important;
+  height: 28px!important;
+  min-width: 28px!important
+}
+.statblock {
+  transform: scale(.68)!important;
+  transform-origin: left bottom!important;
+  bottom: 7vh!important;
+  left: 24px!important
+}
+.caption {
+  max-width: min(360px,30vw)!important;
+  padding: 12px 14px!important;
+  bottom: 11vh!important
+}
+.caption h2 {
+  font-size: clamp(20px,1.8vw,30px)!important;
+  line-height: 1.06!important
+}
+.caption p {
+  font-size: 12px!important;
+  line-height: 1.38!important
+}
+.filmControlsMaurienne {
+  position: absolute;
+  right: 26px;
+  bottom: 28px;
+  z-index: 30;
+  display: flex;
+  gap: 10px;
+  align-items: center
+}
+.filmControlsMaurienne button {
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(4,10,16,.62);
+  color: #fff;
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-family: Arial,Helvetica,sans-serif;
+  font-weight: 800;
+  cursor: pointer;
+  backdrop-filter: blur(8px)
+}
+.filmControlsMaurienne button:hover {
+  background: rgba(4,10,16,.86)
+}
+@media(max-width:900px) {
+  .steps {
+    display: none!important
+  }
+  .caption {
+    left: 18px!important;
+    right: 18px!important;
+    max-width: none!important
+  }
+  .filmControlsMaurienne {
+    right: 18px;
+    bottom: 18px
+  }
+}
+</style>
+</head>
+<body>
+  <div class="film" id="film">
+    
+      <section class="scene active" data-motion="wideTerritory" style="background-image:url('../assets/img/maurienne-1-territoire.webp')">
+        <div class="scene-overlay"></div>
+        <div class="caption left">
+          <div class="cap-kicker">Maurienne</div>
+          <h2>Des territoires vastes<br/>et peu denses</h2>
+          <p>144 bus France services circulent dans les espaces de très faible densité.</p>
+        </div>
+      </section>
+    
+
+      <section class="scene " data-motion="zoomVillage" style="background-image:url('../assets/img/maurienne-2-village.webp')">
+        <div class="scene-overlay"></div>
+        <div class="caption right">
+          <div class="cap-kicker">Au plus près</div>
+          <h2>Des villages isolés<br/>au cœur des montagnes</h2>
+          <p>Le service mobile s’adapte à l’habitat dispersé et aux contraintes d’accès.</p>
+        </div>
+      </section>
+    
+
+      <section class="scene " data-motion="approachBus" style="background-image:url('../assets/img/maurienne-3-bus.webp')">
+        <div class="scene-overlay"></div>
+        <div class="caption left">
+          <div class="cap-kicker">Sur le terrain</div>
+          <h2>Un service public<br/>qui vient à vous</h2>
+          <p>Le bus France services fait entrer l’accompagnement administratif dans les bourgs et les villages.</p>
+        </div>
+      </section>
+    
+
+      <section class="scene " data-motion="insideBus" style="background-image:url('../assets/img/maurienne-4-interieur-bus.webp')">
+        <div class="scene-overlay"></div>
+        <div class="caption right">
+          <div class="cap-kicker">À l’intérieur du bus</div>
+          <h2>Un espace mobile<br/>de proximité</h2>
+          <p>Ordinateurs, informations, médiation numérique : un accueil concret, directement au plus près des habitants.</p>
+        </div>
+      </section>
+    
+
+      <section class="scene " data-motion="formsClose" style="background-image:url('../assets/img/maurienne-5-formulaires.webp')">
+        <div class="scene-overlay"></div>
+        <div class="caption left">
+          <div class="cap-kicker">Accompagner les démarches</div>
+          <h2>Aide aux formulaires<br/>et aux situations individuelles</h2>
+          <p>Le service mobile accompagne les usagers dans des démarches souvent complexes.</p>
+        </div>
+      </section>
+    
+
+      <section class="scene " data-motion="screenDetail" style="background-image:url('../assets/img/maurienne-6-ecran.webp')">
+        <div class="scene-overlay"></div>
+        <div class="caption right">
+          <div class="cap-kicker">Médiation numérique</div>
+          <h2>Des réponses concrètes<br/>là où les besoins sont réels</h2>
+          <p>Accueil, information et appui numérique : les bus France services prolongent la présence publique dans les espaces peu denses.</p>
+        </div>
+      </section>
+    
+    <div class="grain"></div>
+    <div class="letterbox-top"></div>
+    <div class="letterbox-bottom"></div>
+
+    <div class="hud">
+      <div class="topline">
+        <div class="titleblock">
+          <small>Savoie · Maurienne</small>
+          <h1>Les bus<br/>France services</h1>
+          <div class="sub">Une réelle capacité à s’adapter à la diversité des territoires.</div>
+        </div>
+        <div class="steps" id="steps">
+          <div class="step current"><div class="pin">◎</div><div class="steptext"><b>Maurienne</b>Des territoires vastes et peu denses</div></div>
+          <div class="step"><div class="pin">◎</div><div class="steptext"><b>Au plus près</b>Des villages isolés au cœur des montagnes</div></div>
+          <div class="step"><div class="pin">◎</div><div class="steptext"><b>Sur le terrain</b>Un service public qui vient à vous</div></div>
+        </div>
+      </div>
+      <div class="statblock">
+        <div class="statline"></div>
+        <div class="stattext">
+          <div class="num">144</div>
+          <div class="desc">bus France services circulent dans les espaces de très faible densité.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="intro" id="intro">
+      <div class="intro-card">
+        <small>Maurienne — service public mobile</small>
+        <h2>Les bus France services</h2>
+        <p>De l’image satellitaire à l’intérieur du bus : un trajet visuel vers un service public mobile, proche et concret.</p>
+        <div class="controls">
+          <button class="play" id="playBtn">▶ Lancer le film</button>
+          <button class="ghost" id="pauseBtn">Ⅱ Pause</button>
+          <button class="ghost" id="replayBtn">↻ Rejouer</button>
+          <button class="ghost" id="fsBtn">⤢ Plein écran</button>
+          <div class="status" id="status">durée approximative · 42 secondes</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="filmControlsMaurienne">
+          <button id="filmPlayBtn" type="button">▶ Lecture</button>
+          <button id="filmPauseBtn" type="button">Ⅱ Pause</button>
+        </div>
+        <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+  </div>
+
+<script>
+  const scenes = Array.from(document.querySelectorAll('.scene'));
+  const steps = Array.from(document.querySelectorAll('.step'));
+  const intro = document.getElementById('intro');
+  const playBtn = document.getElementById('playBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const replayBtn = document.getElementById('replayBtn');
+  const fsBtn = document.getElementById('fsBtn');
+  const filmPlayBtn = document.getElementById('filmPlayBtn');
+  const filmPauseBtn = document.getElementById('filmPauseBtn');
+  const progress = document.getElementById('progress');
+  const status = document.getElementById('status');
+  const film = document.getElementById('film');
+
+  const frameDuration = 7000;
+  const totalDuration = frameDuration * scenes.length;
+  let timer = null, raf = null, current = 0, playing = false, paused = false;
+
+  function showScene(index) {
+    scenes.forEach((scene, i) => scene.classList.toggle('active', i === index));
+    steps.forEach((step, i) => step.classList.toggle('current', (index < 2 && i === 0) || (index >= 2 && index < 4 && i === 1) || (index >= 4 && i === 2)));
+  }
+  function clearAll(){ if (timer) clearTimeout(timer); if (raf) cancelAnimationFrame(raf); }
+  function animateProgress() {
+    if (raf) cancelAnimationFrame(raf);
+    const base = current * frameDuration;
+    const start = performance.now();
+    function tick(now) {
+      if (!playing || paused) return;
+      const elapsed = base + (now - start);
+      progress.style.width = Math.min(100, elapsed / totalDuration * 100) + '%';
+      raf = requestAnimationFrame(tick);
+    }
+    raf = requestAnimationFrame(tick);
+  }
+  function scheduleNext() {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      if (!playing || paused) return;
+      current += 1;
+      if (current >= scenes.length) { finishFilm(); return; }
+      showScene(current);
+      animateProgress();
+      scheduleNext();
+    }, frameDuration);
+  }
+  function playFilm(reset=false) {
+    clearAll();
+    if (reset) current = 0;
+    intro.classList.add('hidden');
+    film.classList.add('playing');
+    playing = true; paused = false;
+    showScene(current);
+    animateProgress();
+    scheduleNext();
+    status.textContent = 'lecture en cours';
+    pauseBtn.textContent = 'Ⅱ Pause';
+  }
+  function pauseFilm() {
+    if (!playing) { playFilm(false); return; }
+    paused = !paused;
+    if (paused) {
+      clearAll();
+      pauseBtn.textContent = '▶ Reprendre';
+      status.textContent = 'lecture en pause';
+    } else {
+      playFilm(false);
+    }
+  }
+  function finishFilm() {
+    clearAll(); playing = false; paused = false;
+    current = scenes.length - 1;
+    showScene(current);
+    progress.style.width = '100%';
+    status.textContent = 'film terminé · vous pouvez le rejouer';
+    pauseBtn.textContent = 'Ⅱ Pause';
+  }
+  async function toggleFullscreen() {
+    try {
+      if (!document.fullscreenElement) await film.requestFullscreen();
+      else await document.exitFullscreen();
+    } catch (e) {}
+  }
+  playBtn.addEventListener('click', () => playFilm(false));
+  pauseBtn.addEventListener('click', pauseFilm);
+  replayBtn.addEventListener('click', () => playFilm(true));
+  fsBtn.addEventListener('click', toggleFullscreen);
+  if (filmPlayBtn) filmPlayBtn.addEventListener('click', () => playFilm(false));
+  if (filmPauseBtn) filmPauseBtn.addEventListener('click', pauseFilm);
+  showScene(0);
+</script>
+</body>
+</html>

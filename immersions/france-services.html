@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Immersion dans une France services</title>
+<style>
+:root {
+  --duration: 46s;
+  --ink: #ffffff;
+  --shadow: rgba(0,0,0,.55)
+}
+* {
+  box-sizing: border-box
+}
+body,
+html {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #090909;
+  font-family: Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+}
+.film {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #070707;
+  cursor: auto
+}
+.shot {
+  position: absolute;
+  inset: -3vh -3vw;
+  width: 106vw;
+  height: 106vh;
+  object-fit: cover;
+  opacity: 0;
+  will-change: transform,opacity,filter;
+  filter: contrast(1.04) saturate(1.04);
+  animation-duration: var(--duration);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transform-origin: center center
+}
+.s1 {
+  animation-name: shot1;
+  object-position: 38% 48%
+}
+.s2 {
+  animation-name: shot2;
+  object-position: 20% 48%
+}
+.s3 {
+  animation-name: shot3;
+  object-position: 46% 43%
+}
+.s4 {
+  animation-name: shot4;
+  object-position: 50% 50%
+}
+.s5 {
+  animation-name: shot5;
+  object-position: 57% 52%
+}
+.s6 {
+  animation-name: shot6;
+  object-position: 62% 54%
+}
+.s7 {
+  animation-name: shot7;
+  object-position: 46% 58%
+}
+@keyframes shot1 {
+  0% {
+    opacity: 0;
+    transform: scale(1.02) translate3d(0,0,0)
+  }
+  2% {
+    opacity: 1
+  }
+  11% {
+    opacity: 1;
+    transform: scale(1.26) translate3d(10vw,-1vh,0)
+  }
+  14% {
+    opacity: 0;
+    transform: scale(1.34) translate3d(14vw,-1vh,0)
+  }
+  100% {
+    opacity: 0
+  }
+}
+@keyframes shot2 {
+  0%,
+  11% {
+    opacity: 0;
+    transform: scale(1.06) translate3d(0,0,0)
+  }
+  14% {
+    opacity: 1
+  }
+  23% {
+    opacity: 1;
+    transform: scale(1.34) translate3d(18vw,0,0)
+  }
+  26% {
+    opacity: 0;
+    transform: scale(1.42) translate3d(22vw,0,0)
+  }
+  100% {
+    opacity: 0
+  }
+}
+@keyframes shot3 {
+  0%,
+  23% {
+    opacity: 0;
+    transform: scale(1.03) translate3d(0,0,0)
+  }
+  26% {
+    opacity: 1
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1.28) translate3d(-3vw,3vh,0)
+  }
+  38% {
+    opacity: 0;
+    transform: scale(1.34) translate3d(-5vw,4vh,0)
+  }
+  100% {
+    opacity: 0
+  }
+}
+@keyframes shot4 {
+  0%,
+  35% {
+    opacity: 0;
+    transform: scale(1.05) translate3d(0,0,0)
+  }
+  38% {
+    opacity: 1
+  }
+  51% {
+    opacity: 1;
+    transform: scale(1.22) translate3d(-1vw,1vh,0)
+  }
+  54% {
+    opacity: 0;
+    transform: scale(1.29) translate3d(-2vw,1vh,0)
+  }
+  100% {
+    opacity: 0
+  }
+}
+@keyframes shot5 {
+  0%,
+  51% {
+    opacity: 0;
+    transform: scale(1.03) translate3d(0,0,0)
+  }
+  54% {
+    opacity: 1
+  }
+  66% {
+    opacity: 1;
+    transform: scale(1.2) translate3d(-5vw,0,0)
+  }
+  69% {
+    opacity: 0;
+    transform: scale(1.25) translate3d(-6vw,0,0)
+  }
+  100% {
+    opacity: 0
+  }
+}
+@keyframes shot6 {
+  0%,
+  66% {
+    opacity: 0;
+    transform: scale(1.02) translate3d(0,0,0)
+  }
+  69% {
+    opacity: 1
+  }
+  81% {
+    opacity: 1;
+    transform: scale(1.23) translate3d(-4vw,2vh,0)
+  }
+  84% {
+    opacity: 0;
+    transform: scale(1.3) translate3d(-6vw,3vh,0)
+  }
+  100% {
+    opacity: 0
+  }
+}
+@keyframes shot7 {
+  0%,
+  81% {
+    opacity: 0;
+    transform: scale(1.04) translate3d(0,0,0)
+  }
+  84% {
+    opacity: 1
+  }
+  96% {
+    opacity: 1;
+    transform: scale(1.52) translate3d(-7vw,8vh,0)
+  }
+  99% {
+    opacity: 1;
+    transform: scale(1.58) translate3d(-8vw,9vh,0)
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.6) translate3d(-8vw,9vh,0)
+  }
+}
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%,rgba(255,255,255,0) 0,rgba(255,255,255,0) 46%,rgba(0,0,0,.3) 100%),linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,0) 24%,rgba(0,0,0,.17));
+  z-index: 10
+}
+.door-wipe {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  pointer-events: none;
+  animation: door var(--duration) linear infinite
+}
+.door-wipe::after,
+.door-wipe::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50.5%;
+  height: 100%;
+  background: rgba(5,5,5,.82);
+  backdrop-filter: blur(1px)
+}
+.door-wipe::before {
+  left: 0;
+  transform-origin: left center;
+  animation: leftDoor var(--duration) linear infinite
+}
+.door-wipe::after {
+  right: 0;
+  transform-origin: right center;
+  animation: rightDoor var(--duration) linear infinite
+}
+@keyframes door {
+  0%,
+  100%,
+  35%,
+  37%,
+  45% {
+    opacity: 0
+  }
+  39% {
+    opacity: 1
+  }
+}
+@keyframes leftDoor {
+  0%,
+  38% {
+    transform: translateX(0)
+  }
+  100%,
+  45% {
+    transform: translateX(-100%)
+  }
+}
+@keyframes rightDoor {
+  0%,
+  38% {
+    transform: translateX(0)
+  }
+  100%,
+  45% {
+    transform: translateX(100%)
+  }
+}
+.pulse {
+  position: absolute;
+  inset: 0;
+  z-index: 11;
+  pointer-events: none;
+  animation: pulse var(--duration) linear infinite;
+  background: radial-gradient(circle at 42% 49%,rgba(255,255,255,.16),rgba(255,255,255,0) 30%);
+  opacity: 0
+}
+@keyframes pulse {
+  0%,
+  36% {
+    opacity: 0;
+    transform: scale(1)
+  }
+  40% {
+    opacity: .52;
+    transform: scale(1.03)
+  }
+  100%,
+  46% {
+    opacity: 0;
+    transform: scale(1.18)
+  }
+}
+.hud {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  color: var(--ink);
+  text-shadow: 0 4px 20px var(--shadow);
+  opacity: .88;
+  transition: opacity .25s;
+  cursor: auto
+}
+.film:hover .hud {
+  opacity: 1
+}
+button {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.76);
+  color: #fff;
+  background: rgba(0,0,0,.22);
+  backdrop-filter: blur(12px);
+  font-size: 16px;
+  cursor: pointer
+}
+.progress {
+  width: min(420px,44vw);
+  height: 3px;
+  background: rgba(255,255,255,.28);
+  border-radius: 999px;
+  overflow: hidden
+}
+.bar {
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  transform-origin: left center;
+  animation: progress var(--duration) linear infinite
+}
+@keyframes progress {
+  from {
+    transform: scaleX(0)
+  }
+  to {
+    transform: scaleX(1)
+  }
+}
+.caption {
+  position: fixed;
+  right: 24px;
+  bottom: 23px;
+  z-index: 20;
+  color: rgba(255,255,255,.74);
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-shadow: 0 4px 18px rgba(0,0,0,.65)
+}
+.paused .bar,
+.paused .door-wipe,
+.paused .door-wipe::after,
+.paused .door-wipe::before,
+.paused .pulse,
+.paused .shot {
+  animation-play-state: paused
+}
+@media (max-width:760px) {
+  .shot {
+    inset: 0;
+    width: 100vw;
+    height: 100vh
+  }
+  .progress {
+    width: 44vw
+  }
+  .caption {
+    display: none
+  }
+}
+.hud {
+  display: flex;
+  align-items: center;
+  gap: 12px
+}
+.hudBtns {
+  display: flex;
+  gap: 8px
+}
+.hud button {
+  border: 0;
+  border-radius: 999px;
+  background: rgba(8,19,29,.72);
+  color: #fff;
+  padding: 10px 14px;
+  font-weight: 800;
+  cursor: pointer
+}
+.hud button:hover {
+  background: rgba(8,19,29,.9)
+}
+</style>
+</head>
+<body>
+  <main class="film" id="film" aria-label="Film immersif France services">
+    <img class="shot s1" src="../assets/img/france-services-cour-exterieure-de-la-france-services.webp" alt="Cour extérieure de la France services" />
+    <img class="shot s2" src="../assets/img/france-services-approche-vers-la-porte-de-la.webp" alt="Approche vers la porte de la France services" />
+    <img class="shot s3" src="../assets/img/france-services-signaletique-et-entree-france-services.webp" alt="Signalétique et entrée France services" />
+    <img class="shot s4" src="../assets/img/france-services-interieur-de-la-france-services.webp" alt="Intérieur de la France services" />
+    <img class="shot s5" src="../assets/img/france-services-bureau-d.webp" alt="Bureau d'accompagnement France services" />
+    <img class="shot s6" src="../assets/img/france-services-aide-a-remplir-un-dossier-administratif.webp" alt="Aide à remplir un dossier administratif" />
+    <img class="shot s7" src="../assets/img/france-services-gros-plan-formulaire.webp" alt="Gros plan sur un formulaire administratif" />
+    <div class="pulse"></div>
+    <div class="door-wipe"></div>
+    <div class="vignette"></div>
+    <div class="hud">
+      <div class="hudBtns">
+        <button id="playBtn" aria-label="Lancer le film">▶</button>
+        <button id="toggle" aria-label="Pause ou lecture">Ⅱ</button>
+        <button id="stopBtn" aria-label="Arrêter le film">■</button>
+      </div>
+      <div class="progress"><div class="bar"></div></div>
+    </div>
+    <div class="caption">Entrer — être accompagné — faire ses démarches</div>
+  </main>
+<script>
+  const film = document.getElementById("film");
+  const toggle = document.getElementById("toggle");
+  const playBtn = document.getElementById("playBtn");
+  const stopBtn = document.getElementById("stopBtn");
+  function playFilm(){ film.classList.remove("paused"); toggle.textContent = "Ⅱ"; }
+  function togglePause() {
+    film.classList.toggle("paused");
+    toggle.textContent = film.classList.contains("paused") ? "▶" : "Ⅱ";
+  }
+  function stopFilm(){ window.location.reload(); }
+  playBtn.addEventListener("click", playFilm);
+  toggle.addEventListener("click", togglePause);
+  stopBtn.addEventListener("click", stopFilm);
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "Space") { event.preventDefault(); togglePause(); }
+  });
+</script>
+</body>
+</html>

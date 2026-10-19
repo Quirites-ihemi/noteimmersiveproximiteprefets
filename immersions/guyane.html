@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>La pirogue France services — Guyane</title>
+<style>
+:root {
+  --night: #040a10;
+  --gold: #c6a86f;
+  --text: #f2f6f8;
+  --line: rgba(255,255,255,.13);
+  --blue: #8ec8e6
+}
+* {
+  box-sizing: border-box
+}
+html {
+  scroll-behavior: smooth
+}
+body {
+  background: var(--night);
+  color: var(--text);
+  font-family: Georgia,'Times New Roman',serif;
+  overflow-x: hidden
+}
+.sceneBlock {
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+  background: #02070c
+}
+.frames {
+  position: absolute;
+  inset: 0
+}
+.scene {
+  position: absolute;
+  inset: -2%;
+  opacity: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.04);
+  transition: opacity 4.4s ease-in-out;
+  will-change: opacity,transform
+}
+.scene.active {
+  opacity: 1
+}
+.scene-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,rgba(2,6,10,.5) 0,rgba(2,6,10,.08) 26%,rgba(2,6,10,.16) 58%,rgba(2,6,10,.78) 100%),radial-gradient(circle at center,rgba(255,255,255,0) 42%,rgba(0,0,0,.24) 100%)
+}
+.letterbox:after,
+.letterbox:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 6vh;
+  z-index: 8;
+  pointer-events: none;
+  background: linear-gradient(180deg,rgba(0,0,0,.86),rgba(0,0,0,.22),rgba(0,0,0,0))
+}
+.letterbox:before {
+  top: 0
+}
+.letterbox:after {
+  bottom: 0;
+  transform: rotate(180deg)
+}
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  opacity: .07;
+  mix-blend-mode: screen;
+  background-image: radial-gradient(circle at 20% 30%,rgba(255,255,255,.8) 0,rgba(255,255,255,0) 1px),radial-gradient(circle at 70% 75%,rgba(255,255,255,.7) 0,rgba(255,255,255,0) 1px);
+  background-size: 3px 3px,4px 4px
+}
+.hud {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  pointer-events: none
+}
+.topMeta {
+  position: absolute;
+  top: 18px;
+  left: 28px;
+  right: 28px;
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+  align-items: flex-start
+}
+.kicker {
+  font-family: Arial,Helvetica,sans-serif;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #dbeaf1;
+  margin-bottom: 10px
+}
+.mainTitle {
+  font-size: clamp(38px,6vw,84px);
+  line-height: .94;
+  font-weight: 500;
+  text-shadow: 0 2px 20px rgba(0,0,0,.24)
+}
+.subtitle {
+  margin-top: 13px;
+  color: var(--gold);
+  font-family: Arial,Helvetica,sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-size: clamp(15px,1.5vw,24px);
+  line-height: 1.25;
+  max-width: 30ch
+}
+.pill {
+  font-family: Arial,Helvetica,sans-serif;
+  border: 1px solid var(--line);
+  background: rgba(7,15,23,.38);
+  backdrop-filter: blur(8px);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 12px;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: #eef6fa;
+  white-space: nowrap
+}
+.microcopy {
+  position: absolute;
+  z-index: 5;
+  bottom: 12vh;
+  max-width: min(520px,36vw);
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: linear-gradient(180deg,rgba(7,15,23,.08),rgba(7,15,23,.54));
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.14)
+}
+.microcopy.left {
+  left: 32px
+}
+.microcopy.right {
+  right: 32px
+}
+.micro-kicker {
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #d9edf7;
+  margin-bottom: 8px
+}
+.microcopy h3 {
+  margin: 0 0 8px;
+  font-size: clamp(24px,2.4vw,40px);
+  line-height: 1.04;
+  font-weight: 500
+}
+.microcopy p {
+  margin: 0;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #edf4f7
+}
+.intro {
+  position: absolute;
+  inset: 0;
+  z-index: 14;
+  display: flex;
+  align-items: flex-end;
+  padding: 32px;
+  transition: opacity .8s,visibility .8s
+}
+#guyane .intro {
+  background: linear-gradient(180deg,rgba(2,7,12,.14) 0,rgba(2,7,12,.04) 34%,rgba(2,7,12,.76) 100%),url('../assets/img/guyane-intro.webp') center/cover no-repeat
+}
+.intro.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none
+}
+.introCard {
+  max-width: min(860px,92vw)
+}
+.introCard h2 {
+  margin: 0 0 12px;
+  font-size: clamp(42px,6vw,88px);
+  line-height: .94;
+  font-weight: 500;
+  text-shadow: 0 2px 18px rgba(0,0,0,.2)
+}
+.introCard p {
+  margin: 0 0 20px;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: clamp(17px,1.5vw,23px);
+  line-height: 1.48;
+  color: #edf4f7;
+  max-width: 60ch
+}
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-family: Arial,Helvetica,sans-serif
+}
+button {
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  padding: 14px 22px;
+  font-family: Arial,Helvetica,sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  transition: transform .15s
+}
+button:hover {
+  transform: translateY(-1px)
+}
+.play {
+  background: #f0f8fb;
+  color: #082231;
+  box-shadow: 0 10px 28px rgba(0,0,0,.28)
+}
+.ghost {
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.16)
+}
+.progressWrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  z-index: 16;
+  background: rgba(255,255,255,.08)
+}
+.progress {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg,var(--blue),var(--gold));
+  box-shadow: 0 0 18px rgba(164,220,244,.45)
+}
+.scene[data-motion=map] {
+  animation: 11.6s ease-in-out infinite alternate map
+}
+.scene[data-motion=aerial] {
+  animation: 11.6s ease-in-out infinite alternate aerial
+}
+.scene[data-motion=wide] {
+  animation: 11.6s ease-in-out infinite alternate wide
+}
+.scene[data-motion=push] {
+  animation: 11.6s ease-in-out infinite alternate push
+}
+.scene[data-motion=pan] {
+  animation: 11.6s ease-in-out infinite alternate pan
+}
+.scene[data-motion=settle] {
+  animation: 11.6s ease-in-out infinite alternate settle
+}
+.scene[data-motion=dock] {
+  animation: 11.6s ease-in-out infinite alternate dock
+}
+.scene[data-motion=final] {
+  animation: 11.6s ease-in-out infinite alternate final
+}
+@keyframes map {
+  from {
+    transform: scale(1.02);
+    background-position: 44% 42%
+  }
+  to {
+    transform: scale(1.18);
+    background-position: 55% 58%
+  }
+}
+@keyframes aerial {
+  from {
+    transform: scale(1.03);
+    background-position: 50% 42%
+  }
+  to {
+    transform: scale(1.17);
+    background-position: 53% 55%
+  }
+}
+@keyframes wide {
+  from {
+    transform: scale(1.05) translateX(-1%)
+  }
+  to {
+    transform: scale(1.14) translateX(1%)
+  }
+}
+@keyframes push {
+  from {
+    transform: scale(1.03);
+    background-position: 50% 55%
+  }
+  to {
+    transform: scale(1.19);
+    background-position: 51% 48%
+  }
+}
+@keyframes pan {
+  from {
+    transform: scale(1.07) translateX(1.3%)
+  }
+  to {
+    transform: scale(1.15) translateX(-1%)
+  }
+}
+@keyframes settle {
+  from {
+    transform: scale(1.03);
+    background-position: 50% 52%
+  }
+  to {
+    transform: scale(1.14);
+    background-position: 52% 46%
+  }
+}
+@keyframes dock {
+  from {
+    transform: scale(1.03);
+    background-position: 47% 50%
+  }
+  to {
+    transform: scale(1.17);
+    background-position: 56% 52%
+  }
+}
+@keyframes final {
+  from {
+    transform: scale(1.02)
+  }
+  to {
+    transform: scale(1.11);
+    background-position: 53% 48%
+  }
+}
+@media(max-width:900px) {
+  .topMeta {
+    left: 18px;
+    right: 18px;
+    flex-direction: column;
+    gap: 12px
+  }
+  .mainTitle {
+    font-size: clamp(38px,12vw,72px)
+  }
+  .subtitle {
+    font-size: 15px
+  }
+  .microcopy {
+    left: 16px!important;
+    right: 16px!important;
+    bottom: 12vh;
+    max-width: none
+  }
+  .intro {
+    padding: 18px
+  }
+}
+body,
+html {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #02070c
+}
+.sceneBlock {
+  min-height: 100vh!important;
+  height: 100vh!important
+}
+.bigLaunch {
+  font-size: 1.25rem!important;
+  padding: 20px 34px!important;
+  font-weight: 900!important;
+  box-shadow: 0 18px 40px rgba(0,0,0,.3)!important
+}
+.filmControls {
+  position: absolute;
+  right: 28px;
+  bottom: 28px;
+  z-index: 13;
+  display: flex;
+  gap: 10px;
+  align-items: center
+}
+.filmControls button {
+  pointer-events: auto;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(4,10,16,.58);
+  color: #fff;
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-family: Arial,Helvetica,sans-serif;
+  font-weight: 800;
+  cursor: pointer;
+  backdrop-filter: blur(8px)
+}
+.filmControls button:hover {
+  background: rgba(4,10,16,.82)
+}
+.controls .ghost {
+  font-size: 1rem!important;
+  padding: 15px 21px!important
+}
+</style>
+</head>
+<body>
+<section class="sceneBlock letterbox" id="guyane"><div class="frames"><section class='scene active' data-motion='map' style="background-image:url('../assets/img/guyane-situer-le-cheminement.webp')"><div class='scene-shade'></div><div class='microcopy left'><div class='micro-kicker'>Guyane · Oyapock</div><h3>Situer le cheminement</h3><p>Camopi se rejoint par le fleuve : l’aller vers commence par la distance à franchir.</p></div></section>
+<section class='scene ' data-motion='aerial' style="background-image:url('../assets/img/guyane-vers-camopi.webp')"><div class='scene-shade'></div><div class='microcopy right'><div class='micro-kicker'>Approche</div><h3>Vers Camopi</h3><p>Le village apparaît au milieu de l’eau, de la forêt et des contraintes territoriales.</p></div></section>
+<section class='scene ' data-motion='wide' style="background-image:url('../assets/img/guyane-prendre-le-fleuve.webp')"><div class='scene-shade'></div><div class='microcopy left'><div class='micro-kicker'>Navigation</div><h3>Prendre le fleuve</h3><p>Le service public se met en mouvement, au rythme de l’Oyapock.</p></div></section>
+<section class='scene ' data-motion='push' style="background-image:url('../assets/img/guyane-etre-dans-le-deplacement.webp')"><div class='scene-shade'></div><div class='microcopy right'><div class='micro-kicker'>Dans la pirogue</div><h3>Être dans le déplacement</h3><p>Le point de vue embarqué donne au lecteur le sentiment d’avancer vers l’usager.</p></div></section>
+<section class='scene ' data-motion='pan' style="background-image:url('../assets/img/guyane-traverser-les-rives-habitees.webp')"><div class='scene-shade'></div><div class='microcopy left'><div class='micro-kicker'>Territoire fluvial</div><h3>Traverser les rives habitées</h3><p>Le fleuve est une voie de vie, de circulation et de desserte.</p></div></section>
+<section class='scene ' data-motion='settle' style="background-image:url('../assets/img/guyane-bienvenue-a-camopi.webp')"><div class='scene-shade'></div><div class='microcopy right'><div class='micro-kicker'>Arrivée</div><h3>Bienvenue à Camopi</h3><p>L’arrivée rend visible l’objectif : rejoindre les habitants là où ils vivent.</p></div></section>
+<section class='scene ' data-motion='dock' style="background-image:url('../assets/img/guyane-la-pirogue-comme-service-mobile.webp')"><div class='scene-shade'></div><div class='microcopy left'><div class='micro-kicker'>Accoster</div><h3>La pirogue comme service mobile</h3><p>L’aller vers devient un dispositif concret : embarquer, naviguer, accoster, accompagner.</p></div></section>
+<section class='scene ' data-motion='final' style="background-image:url('../assets/img/guyane-laccueil-au-bout-du-trajet.webp')"><div class='scene-shade'></div><div class='microcopy right'><div class='micro-kicker'>Service rendu</div><h3>L’accueil au bout du trajet</h3><p>L’action publique prend forme dans l’accompagnement effectif des démarches.</p></div></section></div><div class="grain"></div><div class="hud"><div class="topMeta"><div><div class="kicker">De l’accueil à l’aller vers</div><div class="mainTitle">La pirogue<br>de l’Est guyanais</div><div class="subtitle">Un service public qui remonte l’Oyapock pour rejoindre Camopi.</div></div><div class="pill">Oyapock · Camopi</div></div></div><div class="intro"><div class="introCard"><div class="kicker">Guyane · Est guyanais</div><h2>La pirogue France services</h2><p>Un film immersif : carte, fleuve, navigation, arrivée à Camopi et service rendu. Le mouvement raconte la « livraison de l’action publique à domicile ».</p><div class="controls"><button class="play bigLaunch" data-play="guyane">▶ Lancer le film</button><button class="ghost" data-pause="guyane">Ⅱ Pause</button><button class="ghost" data-fullscreen="guyane">⤢ Plein écran</button></div></div></div><div class="filmControls"><button data-play="guyane">▶ Lecture</button><button data-pause="guyane">Ⅱ Pause</button><button data-fullscreen="guyane">⤢ Plein écran</button></div><div class="progressWrap"><div class="progress"></div></div></section>
+
+<script>
+(function(){
+  const block = document.getElementById('guyane');
+  const scenes = Array.from(block.querySelectorAll('.scene'));
+  const intro = block.querySelector('.intro');
+  const progress = block.querySelector('.progress');
+  const pauseButtons = Array.from(block.querySelectorAll('[data-pause="guyane"]'));
+  const duration = 6800;
+  let timer = null;
+  let raf = null;
+  let current = 0;
+  let running = false;
+  let paused = false;
+
+  function show(index){
+    scenes.forEach((scene, i) => scene.classList.toggle('active', i === index));
+  }
+
+  function clearTimers(){
+    if (timer) clearTimeout(timer);
+    if (raf) cancelAnimationFrame(raf);
+    timer = null;
+    raf = null;
+  }
+
+  function setPauseLabel(){
+    pauseButtons.forEach(btn => {
+      btn.textContent = paused ? '▶ Reprendre' : 'Ⅱ Pause';
+    });
+  }
+
+  function animateProgress(){
+    if (raf) cancelAnimationFrame(raf);
+    const base = current * duration;
+    const start = performance.now();
+    function tick(now){
+      if (!running || paused) return;
+      const elapsed = base + (now - start);
+      progress.style.width = Math.min(100, (elapsed / (duration * scenes.length)) * 100) + '%';
+      raf = requestAnimationFrame(tick);
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  function schedule(){
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      if (!running || paused) return;
+      current += 1;
+      if (current >= scenes.length){
+        current = scenes.length - 1;
+        show(current);
+        progress.style.width = '100%';
+        running = false;
+        paused = false;
+        setPauseLabel();
+        clearTimers();
+        return;
+      }
+      show(current);
+      animateProgress();
+      schedule();
+    }, duration);
+  }
+
+  function play(reset = false){
+    clearTimers();
+    if (reset) {
+      current = 0;
+      progress.style.width = '0%';
+    }
+    intro.classList.add('hidden');
+    running = true;
+    paused = false;
+    show(current);
+    setPauseLabel();
+    animateProgress();
+    schedule();
+  }
+
+  function pause(){
+    if (!running){
+      play(false);
+      return;
+    }
+    paused = !paused;
+    if (paused){
+      clearTimers();
+    } else {
+      play(false);
+    }
+    setPauseLabel();
+  }
+
+  block.querySelectorAll('[data-play="guyane"]').forEach(btn => btn.addEventListener('click', () => play(true)));
+  block.querySelectorAll('[data-pause="guyane"]').forEach(btn => btn.addEventListener('click', pause));
+  block.querySelectorAll('[data-fullscreen="guyane"]').forEach(btn => btn.addEventListener('click', async () => {
+    try{
+      if (!document.fullscreenElement) await block.requestFullscreen();
+      else await document.exitFullscreen();
+    }catch(e){}
+  }));
+
+  show(0);
+})();
+</script>
+
+</body>
+</html>

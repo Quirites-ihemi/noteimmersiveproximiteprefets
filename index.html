@@ -1,0 +1,2621 @@
+<!doctype html>
+<html lang='fr'>
+<head>
+<meta charset='UTF-8'/>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+<title>Autorités préfectorales et proximité de l’action publique</title>
+<style>
+:root {
+  --ink: #16324a;
+  --ink2: #1b4462;
+  --muted: #66778a;
+  --line: rgba(22,50,74,.12);
+  --blue: #174b8b;
+  --teal: #2f90b8;
+  --soft: #eef4f4;
+  --orange: #c87412;
+  --shadow: 0 20px 48px rgba(17,34,52,.12)
+}
+* {
+  box-sizing: border-box
+}
+html {
+  scroll-behavior: smooth
+}
+body {
+  margin: 0;
+  font-family: Inter,system-ui,-apple-system,'Segoe UI',sans-serif;
+  background: #f6f2ea;
+  color: var(--ink);
+  overflow-x: hidden
+}
+img {
+  max-width: 100%;
+  display: block
+}
+a {
+  color: inherit;
+  text-decoration: none
+}
+main {
+  overflow-x: hidden
+}
+.hero {
+  position: relative;
+  min-height: 96vh;
+  display: grid;
+  place-items: center;
+  padding: 7vw 6vw;
+  color: #fff;
+  isolation: isolate;
+  background: #071b2e
+}
+.hero:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(92deg,rgba(6,24,44,.92),rgba(6,24,44,.46)),url('assets/img/carte-france-prefectures.webp') center/cover no-repeat;
+  z-index: -2
+}
+.hero:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 25% 28%,rgba(47,144,184,.3),transparent 28%),linear-gradient(180deg,transparent,rgba(6,24,44,.8));
+  z-index: -1
+}
+.hero-inner {
+  width: min(1120px,100%)
+}
+.kicker {
+  margin: 0 0 1.3rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-size: .82rem;
+  font-weight: 700;
+  color: #b9edf6
+}
+.hero h1 {
+  margin: 0;
+  max-width: 980px;
+  font-size: clamp(2.7rem,6.4vw,6.1rem);
+  line-height: .95;
+  letter-spacing: -.06em
+}
+.hero .sub {
+  font-size: clamp(1.25rem,2.6vw,2rem);
+  color: #deeff4;
+  margin: 1.1rem 0 0
+}
+.hero .lead {
+  margin: 1.8rem 0 2.2rem
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: #fff;
+  color: var(--ink);
+  padding: .95rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 800;
+  box-shadow: 0 12px 28px rgba(0,0,0,.25)
+}
+.navwrap {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,250,242,.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line)
+}
+.navinner {
+  display: grid;
+  gap: .75rem;
+  padding: .9rem 3.5vw .85rem
+}
+.topnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem
+}
+.topnav a {
+  padding: .76rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 800;
+  color: var(--ink);
+  box-shadow: 0 8px 18px rgba(17,34,52,.05)
+}
+.topnav a.primary {
+  background: var(--blue);
+  color: #fff;
+  border-color: transparent
+}
+.progress {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .85rem;
+  color: var(--muted);
+  font-size: .9rem;
+  font-weight: 700
+}
+.progress .step {
+  display: flex;
+  align-items: center;
+  gap: .55rem
+}
+.progress .dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--blue);
+  display: inline-block
+}
+.progress .active .dot {
+  background: var(--blue)
+}
+.progress .arrow {
+  color: #8fa1b1
+}
+.section {
+  padding: 6rem 4.2vw;
+  border-bottom: 1px solid var(--line)
+}
+.section.alt {
+  background: var(--soft)
+}
+.sidecar {
+  display: grid;
+  grid-template-columns: minmax(300px,35vw) 1fr;
+  gap: 2rem;
+  align-items: start
+}
+.textcol {
+  max-width: 560px;
+  position: sticky;
+  top: 122px
+}
+.act-label {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  margin: 0 0 1rem;
+  padding: .4rem .8rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(17,34,52,.05);
+  font-size: .77rem;
+  font-weight: 800;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: .11em
+}
+.textcol h2 {
+  margin: .1rem 0 1rem;
+  font-family: Georgia,'Times New Roman',serif;
+  font-size: clamp(2rem,4vw,3.9rem);
+  line-height: .95;
+  letter-spacing: -.04em;
+  color: var(--ink)
+}
+.textcol p {
+  font-size: 1.05rem;
+  line-height: 1.78;
+  color: #2e3b4a;
+  margin: 0 0 1rem
+}
+.textcol .source {
+  margin-top: 1.4rem;
+  padding: .85rem 1rem;
+  border-radius: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.75);
+  font-size: .85rem;
+  line-height: 1.46;
+  color: var(--muted)
+}
+.visual {
+  min-width: 0;
+  background: #fff;
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: var(--shadow)
+}
+.note {
+  padding: .9rem 1rem;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(17,34,52,.05)
+}
+.note strong {
+  display: block;
+  color: var(--ink2);
+  margin-bottom: .15rem
+}
+.note span {
+  display: block;
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.48
+}
+.boussole {
+  padding: 5.3rem 4.5vw 5.8rem;
+  background: #fbfcfc;
+  border-bottom: 1px solid var(--line)
+}
+.b-head {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 2.2rem
+}
+.b-head h2 {
+  margin: .1rem 0 .8rem;
+  font-family: Georgia,'Times New Roman',serif;
+  font-size: clamp(2.3rem,5vw,4rem);
+  line-height: 1;
+  color: var(--ink)
+}
+.b-head p {
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 760px
+}
+.b-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  max-width: 1250px;
+  margin: 0 auto
+}
+.b-track:before {
+  content: '';
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 170px;
+  height: 3px;
+  background: linear-gradient(90deg,#174b8b,#2f90b8,#c87412);
+  opacity: .24
+}
+.circle-card {
+  position: relative;
+  text-align: center;
+  padding: 0 1rem
+}
+.circle {
+  width: min(320px,90%);
+  aspect-ratio: 1/1;
+  margin: 0 auto 1.05rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  background: #fff;
+  border: 1px solid var(--line);
+  animation: 6s ease-in-out infinite float
+}
+.circle.c2 {
+  animation-delay: .8s
+}
+.circle.c3 {
+  animation-delay: 1.4s
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0)
+  }
+  50% {
+    transform: translateY(-10px)
+  }
+}
+.circle h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: Georgia,'Times New Roman',serif;
+  font-size: clamp(1.35rem,2vw,1.8rem);
+  line-height: 1.08
+}
+.circle p {
+  margin: .8rem 0 0;
+  color: #42556a;
+  font-size: .98rem;
+  line-height: 1.56
+}
+.tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin-top: .9rem
+}
+.tags span {
+  padding: .45rem .7rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--line);
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--ink2)
+}
+.circle.blue {
+  outline: rgba(23,75,139,.08) solid 14px
+}
+.circle.teal {
+  outline: rgba(47,144,184,.1) solid 14px
+}
+.circle.orange {
+  outline: rgba(200,116,18,.11) solid 14px
+}
+.mapstage {
+  position: relative;
+  height: min(76vh,760px);
+  background: #08253a;
+  overflow: hidden
+}
+.mapstage img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.02);
+  animation: 21s ease-in-out infinite mapFade
+}
+.mapstage .m2 {
+  animation-delay: 7s
+}
+.mapstage .m3 {
+  animation-delay: 14s;
+  object-position: center 43%
+}
+@keyframes mapFade {
+  0% {
+    opacity: 0;
+    transform: scale(1.02)
+  }
+  7% {
+    opacity: 1
+  }
+  28% {
+    opacity: 1;
+    transform: scale(1.12)
+  }
+  100%,
+  36% {
+    opacity: 0;
+    transform: scale(1.18)
+  }
+}
+.legendrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  padding: 1rem;
+  background: #fbfcfc;
+  border-top: 1px solid var(--line)
+}
+.legend {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .72rem .9rem;
+  background: #fff;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 18px rgba(17,34,52,.05);
+  font-weight: 700;
+  font-size: .88rem
+}
+.legend i {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  display: inline-block
+}
+.leg1 {
+  background: #f2f2f2;
+  border: 2px solid #777
+}
+.leg2 {
+  background: #2ca6be;
+  border: 2px solid #fff
+}
+.atebox {
+  padding: 1.2rem;
+  background: #f6fbfe
+}
+.atebox img {
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(8,44,74,.14)
+}
+.floatpills {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: .75rem;
+  margin-top: 1rem
+}
+.floatpills span {
+  padding: .72rem .75rem;
+  text-align: center;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-size: .86rem;
+  font-weight: 800;
+  color: var(--ink2);
+  animation: 4.6s ease-in-out infinite lift
+}
+.floatpills span:nth-child(2) {
+  animation-delay: .3s
+}
+.floatpills span:nth-child(3) {
+  animation-delay: .6s
+}
+.floatpills span:nth-child(4) {
+  animation-delay: .9s
+}
+@keyframes lift {
+  0%,
+  100% {
+    transform: translateY(0)
+  }
+  50% {
+    transform: translateY(-5px)
+  }
+}
+.plunge {
+  position: relative;
+  height: min(76vh,760px);
+  background: #071b2e;
+  overflow: hidden
+}
+.plunge img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover
+}
+.plunge .aer {
+  animation: 16s ease-in-out infinite aerial
+}
+.plunge .pla {
+  opacity: 0;
+  animation: 16s ease-in-out infinite place
+}
+@keyframes aerial {
+  0% {
+    opacity: 1;
+    transform: scale(1)
+  }
+  32% {
+    opacity: 1;
+    transform: scale(1.12)
+  }
+  48% {
+    opacity: .52;
+    transform: scale(1.19)
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.22)
+  }
+}
+@keyframes place {
+  0%,
+  40% {
+    opacity: 0;
+    transform: scale(1.06)
+  }
+  56% {
+    opacity: 1;
+    transform: scale(1)
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.12)
+  }
+}
+.compareTop {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: .9rem;
+  align-items: center;
+  padding: 1rem 1rem .2rem
+}
+.compareTop .tag {
+  padding: .8rem 1rem;
+  background: #f7fbff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  text-align: center;
+  font-weight: 800;
+  color: var(--ink2)
+}
+.compareTop .vs {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 900
+}
+.compare {
+  display: grid;
+  grid-template-columns: 1.08fr .94fr;
+  gap: 1rem;
+  padding: .7rem
+}
+.cp {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(17,34,52,.05)
+}
+.cp img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover
+}
+.cp.large img {
+  height: min(74vh,740px);
+  animation: 15s ease-in-out infinite alternate k1
+}
+.cp.med img {
+  height: 41vh;
+  min-height: 280px;
+  animation: 14s ease-in-out infinite alternate k2
+}
+.thumbs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .9rem
+}
+.cp.small img {
+  height: 24vh;
+  min-height: 165px;
+  animation: 13s ease-in-out infinite alternate k3
+}
+@keyframes k1 {
+  from {
+    transform: scale(1)
+  }
+  to {
+    transform: scale(1.07) translateX(-1%)
+  }
+}
+@keyframes k2 {
+  from {
+    transform: scale(1)
+  }
+  to {
+    transform: scale(1.06) translateY(-1.2%)
+  }
+}
+@keyframes k3 {
+  from {
+    transform: scale(1.02)
+  }
+  to {
+    transform: scale(1.09)
+  }
+}
+.transition {
+  padding: 6rem 5vw;
+  background: #0a2238;
+  color: #fff;
+  position: relative;
+  overflow: hidden
+}
+.transition:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 24% 24%,rgba(47,144,184,.18),transparent 24%),linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,0))
+}
+.transinner {
+  position: relative;
+  z-index: 1;
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center
+}
+.transinner .tiny {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .45rem .8rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: #b9edf6
+}
+.transinner h2 {
+  margin: 1rem 0 .9rem;
+  font-family: Georgia,'Times New Roman',serif;
+  font-size: clamp(2.3rem,4vw,3.5rem);
+  line-height: 1
+}
+.transinner p {
+  margin: 0 auto;
+  max-width: 820px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #e6f2f5
+}
+.timelineBoard {
+  padding: 1.15rem;
+  background: #fbfcfc
+}
+.timelineShell {
+  position: relative;
+  min-height: 640px;
+  padding: 2rem 1.6rem 2.2rem;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: linear-gradient(180deg,#fbfcfc,#f4f7f7);
+  overflow: hidden
+}
+.timelineShell:before {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 50%;
+  height: 4px;
+  background: linear-gradient(90deg,rgba(23,75,139,.22),rgba(47,144,184,.22));
+  border-radius: 999px
+}
+.timelineHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem
+}
+.timelineHeader h3 {
+  margin: 0;
+  font-family: Georgia,'Times New Roman',serif;
+  font-size: clamp(1.25rem,1.8vw,1.7rem);
+  line-height: 1.1;
+  color: var(--ink)
+}
+.timelineHeader p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.48;
+  max-width: 420px
+}
+.timelineTrack {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 1rem;
+  align-items: center;
+  min-height: 500px
+}
+.milestone {
+  position: relative;
+  display: grid;
+  align-items: start;
+  justify-items: center;
+  gap: .75rem;
+  z-index: 1
+}
+.milestone:nth-child(odd) {
+  padding-top: 2rem
+}
+.milestone:nth-child(2n) {
+  padding-bottom: 3rem;
+  align-self: end
+}
+.mileDot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: 5px solid #fff;
+  box-shadow: 0 0 0 8px rgba(23,75,139,.12),0 10px 24px rgba(17,34,52,.14);
+  animation: 3.4s ease-in-out infinite pulseDot
+}
+.milestone:nth-child(2) .mileDot {
+  animation-delay: .25s
+}
+.milestone:nth-child(3) .mileDot {
+  animation-delay: .5s
+}
+.milestone:nth-child(4) .mileDot {
+  animation-delay: .75s
+}
+@keyframes pulseDot {
+  0%,
+  100% {
+    transform: scale(1)
+  }
+  50% {
+    transform: scale(1.08)
+  }
+}
+.mileYear {
+  font-size: .82rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--blue)
+}
+.mileCard {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(17,34,52,.08)
+}
+.mileCard h4 {
+  margin: 0 0 .45rem;
+  font-size: 1.03rem;
+  line-height: 1.1;
+  color: var(--ink)
+}
+.mileCard p {
+  margin: 0;
+  color: #435568;
+  font-size: .9rem;
+  line-height: 1.55
+}
+.milePills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: .7rem
+}
+.milePills span {
+  padding: .42rem .62rem;
+  border-radius: 999px;
+  background: #f7fbff;
+  border: 1px solid var(--line);
+  font-size: .74rem;
+  font-weight: 800;
+  color: var(--ink2)
+}
+.lastMileDeck {
+  padding: 1rem;
+  background: #fbfcfc
+}
+.lmHead {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .8rem;
+  align-items: flex-start;
+  margin-bottom: 1rem
+}
+.lmHead h3 {
+  margin: 0;
+  font-family: Georgia,'Times New Roman',serif;
+  font-size: clamp(1.22rem,1.8vw,1.6rem);
+  line-height: 1.12;
+  color: var(--ink)
+}
+.lmHead p {
+  margin: .25rem 0 0;
+  color: var(--muted);
+  font-size: .88rem;
+  line-height: 1.45;
+  max-width: 560px
+}
+.lmTools {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  flex-wrap: wrap
+}
+.lmPause {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .68rem .95rem;
+  border-radius: 999px;
+  border: 2px solid var(--blue);
+  background: #fff;
+  color: var(--ink2);
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(17,34,52,.08)
+}
+.lmPause .icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(23,75,139,.12);
+  color: var(--blue);
+  font-size: .82rem;
+  font-weight: 900
+}
+.lastMileStage {
+  position: relative;
+  height: min(78vh,820px);
+  border-radius: 26px;
+  border: 1px solid var(--line);
+  background: #f2f3f4;
+  overflow: hidden
+}
+.lastMileStage.paused * {
+  animation-play-state: paused!important
+}
+.lmFrame {
+  position: absolute;
+  inset: 0;
+  opacity: 0
+}
+.lmFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #f2f3f4
+}
+.lmCover {
+  animation: 20s ease-in-out infinite lmCover
+}
+.lmCover img {
+  transform-origin: 43% 39%;
+  animation: 20s ease-in-out infinite lmCoverImg
+}
+.lmQuote {
+  display: grid;
+  place-items: center;
+  padding: 4vw;
+  background: linear-gradient(180deg,#f8fbfc,#eef4f4);
+  animation: 20s ease-in-out infinite lmQuote
+}
+.lmQuoteCard {
+  max-width: 760px;
+  padding: 2rem 2.2rem;
+  border-radius: 28px;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 36px rgba(17,34,52,.09)
+}
+.lmQuoteCard .tiny {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .45rem .75rem;
+  border-radius: 999px;
+  background: #f7fbff;
+  border: 1px solid var(--line);
+  font-size: .74rem;
+  font-weight: 900;
+  color: var(--ink2);
+  margin-bottom: 1rem
+}
+.lmQuoteCard blockquote {
+  margin: 0;
+  font-family: Georgia,'Times New Roman',serif;
+  font-size: clamp(1.55rem,2.55vw,2.45rem);
+  line-height: 1.18;
+  color: var(--ink)
+}
+.lmQuoteCard p {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.58
+}
+.lmD1 {
+  animation: 20s ease-in-out infinite lmD1
+}
+.lmD2 {
+  animation: 20s ease-in-out infinite lmD2
+}
+@keyframes lmCover {
+  0%,
+  26% {
+    opacity: 1
+  }
+  100%,
+  34% {
+    opacity: 0
+  }
+}
+@keyframes lmCoverImg {
+  0% {
+    transform: scale(1)
+  }
+  14% {
+    transform: scale(1.03)
+  }
+  26% {
+    transform: scale(1.23)
+  }
+  100%,
+  34% {
+    transform: scale(1.29)
+  }
+}
+@keyframes lmQuote {
+  0%,
+  28% {
+    opacity: 0;
+    transform: scale(1.02)
+  }
+  38% {
+    opacity: 1;
+    transform: scale(1)
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03)
+  }
+  58% {
+    opacity: 0;
+    transform: scale(1.06)
+  }
+  100% {
+    opacity: 0
+  }
+}
+@keyframes lmD1 {
+  0%,
+  54% {
+    opacity: 0;
+    transform: scale(1.02)
+  }
+  64% {
+    opacity: 1;
+    transform: scale(1)
+  }
+  78% {
+    opacity: 1;
+    transform: scale(1.05)
+  }
+  86% {
+    opacity: 0;
+    transform: scale(1.08)
+  }
+  100% {
+    opacity: 0
+  }
+}
+@keyframes lmD2 {
+  0%,
+  82% {
+    opacity: 0;
+    transform: scale(1.02)
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1)
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05)
+  }
+}
+.lmFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  background: #fbfcfc;
+  border-top: 1px solid var(--line)
+}
+.lmCredit {
+  color: var(--muted);
+  font-size: .84rem;
+  line-height: 1.45
+}
+.lmLink {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .62rem .9rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #f7fbff;
+  font-size: .8rem;
+  font-weight: 800;
+  color: var(--ink2)
+}
+.franceServicesView {
+  grid-template-columns: minmax(300px,35vw) 1fr;
+  gap: 2rem;
+  align-items: start
+}
+.franceServicesView .textcol {
+  max-width: 560px
+}
+.fsVisualColumn {
+  min-width: 0;
+  display: grid;
+  gap: 1rem
+}
+.immersiveFranceServices {
+  min-height: min(80vh,840px);
+  background: #050505;
+  border-radius: 34px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(17,34,52,.14)
+}
+.immersiveFranceServices iframe {
+  display: block;
+  width: 100%;
+  height: min(80vh,840px);
+  border: 0;
+  background: #050505
+}
+.fsCtaRail {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: .9rem 1rem;
+  background: #fbfcfc;
+  border-top: 1px solid var(--line)
+}
+.fsFullscreen {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .62rem .9rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #f7fbff;
+  font-size: .8rem;
+  font-weight: 800;
+  color: var(--ink2)
+}
+.fsPartners {
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  box-shadow: 0 10px 24px rgba(17,34,52,.06)
+}
+.fsPartners h3 {
+  margin: 0 0 .7rem;
+  font-family: Georgia,'Times New Roman',serif;
+  font-size: 1.15rem;
+  line-height: 1.15;
+  color: var(--ink)
+}
+.fsPartners p {
+  margin: 0 0 .9rem;
+  color: var(--muted);
+  font-size: .86rem;
+  line-height: 1.45
+}
+.fsPartners img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  background: #f4f4f4
+}
+@media (max-width:1180px) {
+  .franceServicesView {
+    grid-template-columns: 1fr
+  }
+  .franceServicesView .textcol {
+    max-width: 100%
+  }
+}
+@media (max-width:820px) {
+  .immersiveFranceServices iframe {
+    height: 64vh
+  }
+  .fsPartners {
+    padding: .9rem
+  }
+}
+.chartDeck {
+  padding: 1rem;
+  background: #fbfcfc
+}
+.chartShell {
+  display: grid;
+  gap: 1rem
+}
+.chartCard {
+  padding: 1rem 1rem 1.1rem;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(17,34,52,.06)
+}
+.chartTop {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .8rem;
+  align-items: flex-start;
+  margin-bottom: .9rem
+}
+.chartTop h3 {
+  margin: 0;
+  font-family: Georgia,'Times New Roman',serif;
+  font-size: clamp(1.2rem,1.7vw,1.55rem);
+  line-height: 1.14;
+  color: var(--ink)
+}
+.chartTop p {
+  margin: .25rem 0 0;
+  color: var(--muted);
+  font-size: .88rem;
+  line-height: 1.45;
+  max-width: 520px
+}
+.miniTag {
+  padding: .48rem .7rem;
+  border-radius: 999px;
+  background: #f7fbff;
+  border: 1px solid var(--line);
+  font-size: .72rem;
+  font-weight: 900;
+  color: var(--ink2);
+  white-space: nowrap
+}
+.barChartWrap {
+  position: relative;
+  padding: .4rem .1rem .1rem
+}
+.barGrid {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: .45rem;
+  height: 360px;
+  padding: 1.2rem .6rem 2.25rem;
+  border-radius: 18px;
+  background: linear-gradient(180deg,#fbfcfc,#f4f7f7);
+  border: 1px solid var(--line);
+  overflow: hidden
+}
+.barGrid:after,
+.barGrid:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(22,50,74,.1)
+}
+.barGrid:before {
+  bottom: 33%
+}
+.barGrid:after {
+  bottom: 66%
+}
+.barGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  min-width: 0
+}
+.bar {
+  width: 100%;
+  max-width: 34px;
+  border-radius: 12px 12px 4px 4px;
+  background: linear-gradient(180deg,#2f90b8,#1e78a7);
+  box-shadow: 0 10px 18px rgba(47,144,184,.18);
+  cursor: pointer;
+  transition: transform .18s,filter .18s;
+  position: relative
+}
+.bar:hover {
+  transform: translateY(-6px);
+  filter: saturate(1.07)
+}
+.barLabel {
+  margin-top: .55rem;
+  font-size: .66rem;
+  font-weight: 800;
+  color: #506275;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: .03em
+}
+.barTip {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+  padding: .55rem .72rem;
+  border-radius: 12px;
+  background: #0d2940;
+  color: #fff;
+  font-size: .78rem;
+  line-height: 1.35;
+  box-shadow: 0 12px 24px rgba(0,0,0,.18);
+  opacity: 0;
+  transform: translate(-50%,-110%);
+  transition: opacity .16s
+}
+.barTip.show {
+  opacity: 1
+}
+.barSource {
+  margin-top: .75rem;
+  color: var(--muted);
+  font-size: .76rem;
+  line-height: 1.42
+}
+.pieGrid {
+  display: grid;
+  grid-template-columns: minmax(260px,340px) 1fr;
+  gap: 1rem;
+  align-items: center
+}
+.pieWrap {
+  display: grid;
+  place-items: center;
+  padding: 1rem
+}
+.pieChart {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  position: relative;
+  background: conic-gradient(#6b8ce3 0 49%,#57b7c0 49% 85%,#f09c57 85% 93%,#c7d1e3 93% 100%);
+  box-shadow: inset 0 0 0 1px rgba(22,50,74,.08),0 16px 26px rgba(17,34,52,.08)
+}
+.pieChart:after {
+  content: '';
+  position: absolute;
+  inset: 33%;
+  border-radius: 50%;
+  background: #fff
+}
+.pieCenter {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+  text-align: center;
+  padding: 0 2rem
+}
+.pieCenter strong {
+  display: block;
+  font-size: 1.65rem;
+  color: var(--ink)
+}
+.pieCenter span {
+  display: block;
+  margin-top: .2rem;
+  font-size: .84rem;
+  line-height: 1.32;
+  color: var(--muted)
+}
+.legendList {
+  display: grid;
+  gap: .75rem
+}
+.legendItem {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: .7rem;
+  align-items: center;
+  padding: .9rem 1rem;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: #fbfcfc;
+  cursor: pointer;
+  transition: transform .16s,box-shadow .16s,border-color .16s
+}
+.legendItem.active,
+.legendItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(17,34,52,.07);
+  border-color: rgba(23,75,139,.22)
+}
+.legendSwatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%
+}
+.legendText strong {
+  display: block;
+  font-size: .94rem;
+  color: var(--ink)
+}
+.legendText span {
+  display: block;
+  margin-top: .12rem;
+  color: var(--muted);
+  font-size: .82rem;
+  line-height: 1.35
+}
+.legendPct {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--ink2)
+}
+@media (max-width:1180px) {
+  .sidecar {
+    grid-template-columns: 1fr
+  }
+  .textcol {
+    max-width: 100%;
+    position: static
+  }
+  .b-track {
+    grid-template-columns: 1fr;
+    gap: 2rem
+  }
+  .b-track:before {
+    display: none
+  }
+  .compare,
+  .compareTop {
+    grid-template-columns: 1fr
+  }
+  .floatpills {
+    grid-template-columns: repeat(2,1fr)
+  }
+  .timelineTrack {
+    grid-template-columns: 1fr 1fr
+  }
+  .timelineShell:before {
+    left: 50%;
+    right: auto;
+    top: 12%;
+    bottom: 12%;
+    width: 4px;
+    height: auto;
+    transform: translateX(-50%)
+  }
+  .milestone,
+  .milestone:nth-child(2n),
+  .milestone:nth-child(odd) {
+    padding: 0;
+    align-self: auto
+  }
+  .pieGrid {
+    grid-template-columns: 1fr
+  }
+  .lmFooter {
+    align-items: flex-start
+  }
+  .lastMileStage {
+    height: 72vh
+  }
+}
+@media (max-width:820px) {
+  .hero {
+    padding: 5.5rem 5vw
+  }
+  .navinner {
+    padding: .8rem 4vw
+  }
+  .boussole,
+  .section,
+  .transition {
+    padding-left: 4vw;
+    padding-right: 4vw
+  }
+  .circle {
+    width: min(300px,100%)
+  }
+  .floatpills,
+  .thumbs {
+    grid-template-columns: 1fr
+  }
+  .topnav a {
+    font-size: .9rem
+  }
+  .timelineTrack {
+    grid-template-columns: 1fr
+  }
+  .timelineShell {
+    min-height: auto
+  }
+  .barGrid {
+    height: 300px;
+    gap: .32rem;
+    padding-bottom: 2rem
+  }
+  .bar {
+    max-width: 24px
+  }
+  .barLabel {
+    font-size: .58rem
+  }
+  .pieChart {
+    width: 220px;
+    height: 220px
+  }
+  .lastMileStage {
+    height: 60vh
+  }
+  .lmQuoteCard {
+    padding: 1.3rem 1.1rem
+  }
+  .lmQuoteCard blockquote {
+    font-size: 1.3rem
+  }
+}
+.section.deepfilm .sidecar {
+  align-items: stretch;
+  gap: 26px
+}
+.section.deepfilm .textcol {
+  position: relative;
+  z-index: 2;
+  padding-right: clamp(14px,2vw,28px)
+}
+.section.deepfilm .source,
+.section.deepfilm .textcol p {
+  max-width: 34rem
+}
+.section.deepfilm .visual.deepfilmVisual {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 22px 50px rgba(0,0,0,.18);
+  min-width: 0!important
+}
+.section.deepfilm .visual.deepfilmVisual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: 28px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05)
+}
+.deepfilmFrame {
+  display: block;
+  width: 100%;
+  min-height: 78vh;
+  height: 78vh;
+  border: 0;
+  background: #000
+}
+.deepfilmMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0 18px
+}
+.deepfilmMeta .tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(36,74,111,.08);
+  border: 1px solid rgba(36,74,111,.12);
+  font-size: .82rem;
+  color: #35506b;
+  font-weight: 600
+}
+@media (max-width:1080px) {
+  .section.deepfilm .sidecar {
+    grid-template-columns: 1fr
+  }
+  .section.deepfilm .source,
+  .section.deepfilm .textcol h2,
+  .section.deepfilm .textcol p {
+    max-width: none
+  }
+  .deepfilmFrame,
+  .section.deepfilm .visual.deepfilmVisual {
+    min-height: 68vh;
+    height: 68vh
+  }
+}
+@media (max-width:720px) {
+  .deepfilmFrame,
+  .section.deepfilm .visual.deepfilmVisual {
+    min-height: 58vh;
+    height: 58vh;
+    border-radius: 22px
+  }
+}
+.section.deepfilm .sidecar {
+  grid-template-columns: minmax(310px,34%) minmax(0,1fr)!important
+}
+.section.deepfilm .deepfilmMeta {
+  gap: 8px!important
+}
+.section.deepfilm .deepfilmMeta .tag {
+  white-space: nowrap;
+  font-size: .78rem!important;
+  padding: 7px 10px!important
+}
+.section.deepfilm .textcol h2 {
+  overflow-wrap: normal;
+  font-size: clamp(1.75rem,3.35vw,4.05rem)!important;
+  line-height: .98!important;
+  max-width: 13.5ch!important
+}
+.section.deepfilm .textcol p {
+  font-size: clamp(.94rem,.92vw,1.08rem)!important;
+  line-height: 1.52!important
+}
+@media (max-width:1080px) {
+  .section.deepfilm .sidecar {
+    grid-template-columns: 1fr!important
+  }
+  .section.deepfilm .textcol h2 {
+    max-width: none!important
+  }
+  .section.deepfilm .deepfilmFrame,
+  .section.deepfilm .visual.deepfilmVisual {
+    min-height: 70vh!important;
+    height: 70vh!important
+  }
+}
+.quoteBox.benevoloBox {
+  margin-top: 1.2rem;
+  padding: 1.05rem 1.15rem;
+  border-left: 4px solid #194f7a;
+  background: rgba(25,79,122,.08);
+  border-radius: 16px;
+  color: #17314a;
+  font-size: .98rem;
+  line-height: 1.55
+}
+.wideVisual {
+  grid-template-columns: minmax(280px,30%) minmax(0,1fr)!important;
+  gap: clamp(18px,2.5vw,36px)!important
+}
+.tensionSimple {
+  min-height: 72vh!important;
+  padding: clamp(22px,3vw,40px)!important
+}
+.tensionHeader h3 {
+  font-size: clamp(1.5rem,2.3vw,2.5rem);
+  margin: 0 0 .4rem;
+  color: #0b304d
+}
+.num {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #0b4f7c;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 800
+}
+.tensionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem
+}
+.tensionHeader button {
+  border: 0;
+  border-radius: 999px;
+  background: #0b4f7c;
+  color: #fff;
+  font-weight: 800;
+  padding: .7rem 1rem;
+  cursor: pointer
+}
+.tensionStage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 2rem
+}
+.pressureModel,
+.stableModel {
+  background: #fff;
+  border-radius: 28px;
+  padding: 1.35rem;
+  min-height: 430px;
+  box-shadow: 0 16px 40px rgba(21,45,68,.1);
+  border: 1px solid rgba(15,58,92,.1)
+}
+.pressureModel h4,
+.stableModel h4 {
+  font-size: 1.6rem;
+  margin: .2rem 0 1.1rem;
+  color: #0b304d
+}
+.stableGrid {
+  display: grid;
+  gap: 18px
+}
+.stableGrid div {
+  padding: 1.1rem;
+  border-radius: 20px;
+  background: #eef5f8;
+  border: 1px solid rgba(15,58,92,.08)
+}
+.stableGrid b {
+  display: block;
+  font-size: 1.25rem;
+  color: #0b304d
+}
+.stableGrid span {
+  display: block;
+  margin-top: .35rem;
+  color: #4b657c
+}
+.pressureWords {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px
+}
+.pressureWords span {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  min-height: 92px;
+  padding: 1rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg,#fff0df,#f5c486);
+  color: #613809;
+  font-weight: 900;
+  font-size: 1.05rem
+}
+.schemaRead {
+  margin-top: 1rem;
+  color: #4b657c;
+  font-size: 1rem
+}
+.chartDeck .legendText span {
+  display: none!important
+}
+.chartDeck .legendItem {
+  grid-template-columns: auto 1fr auto!important
+}
+.chartDeck .miniTag {
+  display: none!important
+}
+.section.deepfilm .sidecar {
+  grid-template-columns: minmax(270px,28%) minmax(0,1fr)!important;
+  gap: 18px!important
+}
+.section.deepfilm .source {
+  display: none!important
+}
+.section.deepfilm .deepfilmFrame,
+.section.deepfilm .visual.deepfilmVisual {
+  min-height: 86vh!important;
+  height: 86vh!important;
+  background: 0 0!important
+}
+@media (max-width:1100px) {
+  .tensionStage {
+    grid-template-columns: 1fr
+  }
+  .section.deepfilm .sidecar,
+  .wideVisual {
+    grid-template-columns: 1fr!important
+  }
+}
+.perspectiveWrap {
+  grid-template-columns: minmax(320px,34%) minmax(0,1fr)!important;
+  gap: 28px!important;
+  align-items: stretch!important
+}
+.perspectiveSection .textcol p {
+  font-size: 1.03rem;
+  line-height: 1.62;
+  color: #27435d
+}
+.perspectiveSection .vanierBox {
+  margin-top: 1.4rem;
+  background: linear-gradient(135deg,rgba(255,248,230,.92),rgba(248,241,219,.92));
+  border-left: 4px solid #c59a4e
+}
+.perspectiveSection .quoteLabel {
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: #8a6230;
+  font-weight: 800;
+  margin-bottom: .5rem
+}
+.perspectiveVisual {
+  padding: 0!important;
+  background: 0 0!important;
+  border: 0!important;
+  box-shadow: none!important;
+  min-height: 82vh!important
+}
+@media (max-width:1150px) {
+  .perspectiveWrap {
+    grid-template-columns: 1fr!important
+  }
+  .perspectiveVisual {
+    min-height: auto!important
+  }
+}
+.hero .lead {
+  max-width: 72rem!important;
+  font-size: clamp(1.12rem,1.45vw,1.55rem)!important;
+  line-height: 1.58!important;
+  color: rgba(255,255,255,.92)!important
+}
+.pressureWords span:nth-child(6),
+.source:empty {
+  display: none!important
+}
+.noSchemaVisual {
+  padding: 0!important;
+  background: 0 0!important;
+  border: 0!important;
+  box-shadow: none!important;
+  min-height: 82vh!important
+}
+.futurePanel {
+  min-height: 82vh;
+  border-radius: 30px;
+  padding: 32px;
+  background: linear-gradient(180deg,#fbfdfd 0,#f4f6f1 100%);
+  border: 1px solid rgba(17,58,88,.08);
+  box-shadow: 0 22px 54px rgba(17,58,88,.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start
+}
+.futureEyebrow {
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: #73889b;
+  font-weight: 800;
+  margin-bottom: .55rem
+}
+.futurePanel h3 {
+  margin: 0 0 .7rem;
+  font-size: clamp(2rem,3vw,3.6rem);
+  line-height: .95;
+  color: #0b304d
+}
+.futureLead {
+  font-size: 1.08rem;
+  line-height: 1.58;
+  color: #456178;
+  max-width: 54ch;
+  margin: 0 0 1.3rem
+}
+.futureGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: .35rem
+}
+.futureItem {
+  background: #fff;
+  border: 1px solid rgba(17,58,88,.08);
+  border-radius: 22px;
+  padding: 18px 18px 16px;
+  box-shadow: 0 10px 24px rgba(17,58,88,.06)
+}
+.futureItem span {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #0b4f7c;
+  color: #fff;
+  font-weight: 800;
+  margin-bottom: .6rem
+}
+.futureItem strong {
+  display: block;
+  font-size: 1.08rem;
+  color: #0b304d;
+  margin-bottom: .35rem
+}
+.futureItem p {
+  margin: 0;
+  font-size: .98rem;
+  line-height: 1.5;
+  color: #466176
+}
+.futureQuote {
+  margin-top: 1rem;
+  border-left: 4px solid #c59a4e;
+  background: linear-gradient(135deg,rgba(255,248,230,.92),rgba(248,241,219,.92));
+  padding: 1.05rem 1.1rem;
+  border-radius: 18px
+}
+@media (max-width:960px) {
+  .futureGrid {
+    grid-template-columns: 1fr
+  }
+}
+.perspectiveSection .viewLabelTitle {
+  display: block;
+  font-size: clamp(1.45rem,2.6vw,3.2rem);
+  line-height: 1.04;
+  letter-spacing: .01em;
+  margin-bottom: .55em
+}
+.perspectiveSection .questionTitle {
+  display: block;
+  font-size: clamp(2.65rem,5vw,6.2rem);
+  line-height: .92;
+  color: #0b304d;
+  margin-top: .15em
+}
+.perspectiveSection .textcol h2 {
+  line-height: 1.02!important
+}
+.perim-section {
+  background: linear-gradient(135deg,#f7f1e7 0,#eef6f8 100%)
+}
+.perimGrid {
+  grid-template-columns: minmax(300px,30%) minmax(0,1fr)!important;
+  gap: clamp(24px,3vw,48px)!important;
+  align-items: center!important
+}
+.perimText h2 {
+  font-size: clamp(2.55rem,5vw,6.35rem)!important;
+  line-height: .92!important;
+  max-width: 9.4ch!important
+}
+.perimText p {
+  font-size: clamp(1rem,1.08vw,1.2rem)!important;
+  line-height: 1.58!important
+}
+.perimVisual {
+  min-height: 78vh!important;
+  padding: clamp(26px,3vw,44px)!important;
+  border-radius: 34px!important;
+  background: rgba(255,255,255,.78)!important;
+  border: 1px solid rgba(15,58,92,.1)!important;
+  box-shadow: 0 26px 70px rgba(21,45,68,.12)!important
+}
+.perimHeader {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(250px,32%);
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 28px
+}
+.perimKicker {
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: #56738b;
+  font-weight: 900;
+  margin-bottom: .55rem
+}
+.perimHeader h3 {
+  margin: 0;
+  font-size: clamp(2rem,3.4vw,4.1rem);
+  line-height: .96;
+  color: #0b304d;
+  max-width: 13ch
+}
+.perimHeader p {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: #48637a
+}
+.perimDiagram {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 150px minmax(0,1fr);
+  gap: 24px;
+  align-items: stretch
+}
+.perimCard {
+  min-height: 420px;
+  background: #fff;
+  border-radius: 30px;
+  padding: 24px;
+  border: 1px solid rgba(15,58,92,.1);
+  box-shadow: 0 18px 42px rgba(21,45,68,.1);
+  display: flex;
+  flex-direction: column
+}
+.perimBadge {
+  width: max-content;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: .82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: #fff;
+  background: #0b4f7c;
+  margin-bottom: 12px
+}
+.perimCard h4 {
+  margin: 0;
+  font-size: clamp(1.45rem,2vw,2.15rem);
+  line-height: 1.03;
+  color: #0b304d
+}
+.perimCard p {
+  margin: 18px 0 0;
+  color: #48637a;
+  font-size: 1rem;
+  line-height: 1.5
+}
+.perimMap {
+  position: relative;
+  height: 230px;
+  margin-top: 24px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: radial-gradient(circle at 30% 20%,rgba(157,209,217,.3),transparent 35%),linear-gradient(135deg,#eef7f9,#f6f1e7);
+  border: 1px solid rgba(15,58,92,.1)
+}
+.epciShape {
+  position: absolute;
+  inset: 32px 28px 28px;
+  border: 3px dashed rgba(11,79,124,.4);
+  border-radius: 42% 58% 50% 50%/42% 45% 55% 58%;
+  background: rgba(255,255,255,.35)
+}
+.district {
+  position: absolute;
+  top: 72px;
+  bottom: 52px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 12px;
+  font-weight: 900;
+  font-size: .95rem;
+  border-radius: 24px;
+  background: rgba(255,255,255,.18)
+}
+.districtA {
+  left: 46px;
+  width: 31%;
+  border: 4px solid #3b82b7;
+  color: #3b82b7
+}
+.districtB {
+  left: 37%;
+  width: 26%;
+  border: 4px solid #d0833d;
+  color: #d0833d
+}
+.districtC {
+  right: 46px;
+  width: 30%;
+  border: 4px solid #6b8e3d;
+  color: #6b8e3d
+}
+.districtUnified {
+  left: 50px;
+  right: 50px;
+  top: 68px;
+  bottom: 46px;
+  border: 5px solid #6b8e3d;
+  color: #506f54;
+  background: rgba(107,142,61,.08)
+}
+.mapDot {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(255,255,255,.55)
+}
+.before .d1,
+.before .d2 {
+  background: #3b82b7
+}
+.before .d3,
+.before .d4 {
+  background: #d0833d
+}
+.after .mapDot,
+.before .d5,
+.before .d6 {
+  background: #6b8e3d
+}
+.d1 {
+  left: 27%;
+  top: 42%
+}
+.d2 {
+  left: 34%;
+  top: 57%
+}
+.d3 {
+  left: 48%;
+  top: 39%
+}
+.d4 {
+  left: 53%;
+  top: 61%
+}
+.d5 {
+  left: 67%;
+  top: 44%
+}
+.d6 {
+  left: 72%;
+  top: 63%
+}
+.perimArrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #0b304d
+}
+.perimArrow span {
+  padding: 9px 13px;
+  border-radius: 999px;
+  background: #eaf4f8;
+  color: #0b4f7c;
+  font-weight: 900;
+  font-size: .92rem
+}
+.perimArrow strong {
+  font-size: 5.6rem;
+  line-height: 1;
+  color: #9fb4c3;
+  font-weight: 300;
+  margin: .15em 0
+}
+.perimArrow small {
+  max-width: 12ch;
+  font-size: .86rem;
+  line-height: 1.35;
+  color: #5a7389
+}
+.perimBottomNote {
+  margin-top: 24px;
+  padding: 18px 20px;
+  border-radius: 22px;
+  background: rgba(11,79,124,.08);
+  color: #24415d;
+  font-size: 1.05rem;
+  line-height: 1.45
+}
+@media (max-width:1150px) {
+  .perimGrid {
+    grid-template-columns: 1fr!important
+  }
+  .perimText h2 {
+    max-width: none!important
+  }
+  .perimDiagram {
+    grid-template-columns: 1fr
+  }
+  .perimArrow {
+    min-height: 90px
+  }
+  .perimArrow strong {
+    transform: rotate(90deg);
+    font-size: 4rem
+  }
+  .perimHeader {
+    grid-template-columns: 1fr
+  }
+}
+.fsFullscreen{cursor:pointer;font-family:inherit}
+.refBox{margin:1.1rem 0 0;padding:.85rem 1rem;border-radius:15px;border:1px solid var(--line);background:rgba(255,255,255,.82);font-size:.88rem!important;line-height:1.5!important;color:#2e3b4a}
+.refBox .refLabel{display:block;margin-bottom:.3rem;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.refBox a,.biblioList a{text-decoration:underline;text-decoration-color:rgba(23,75,139,.35);text-underline-offset:3px}
+.refBox a:hover,.biblioList a:hover{text-decoration-color:var(--blue)}
+.biblio{padding:6rem 4.5vw;background:#faf7f2;border-top:1px solid var(--line)}
+.biblioBox{max-width:980px;margin:0 auto;padding:clamp(1.6rem,3vw,2.6rem);background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow)}
+.biblioBox h2{margin:.2rem 0 .6rem;font-family:Georgia,'Times New Roman',serif;font-size:clamp(2.2rem,4vw,3.6rem);line-height:1;letter-spacing:-.03em;color:var(--ink)}
+.biblioLead{margin:0 0 1.6rem;color:var(--muted);font-size:1rem}
+.biblioList{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
+.biblioList li{padding:1rem 1.1rem 1rem 1.3rem;border-left:4px solid var(--teal);border-radius:12px;background:#f7fbfc;font-size:1.02rem;line-height:1.6;color:#2e3b4a}
+@media (max-width:820px){.biblio{padding-left:4vw;padding-right:4vw}}
+</style>
+</head>
+<body><main>
+<section class='hero' id='hero'><div class='hero-inner'><p class='kicker'>Note immersive · IHEMI</p><h1>Autorités préfectorales et proximité de l’action publique</h1><p class='sub'>La réinvention de l’accueil des usagers</p><p class='lead'>Cette note éditoriale augmentée constitue le second volet du dossier sur la notion de proximité dans l’action publique. Celle-ci a connu des changements profonds au cours de ces dernières années. Les parcours d’accueil des usagers se sont diversifiés : du guichet comme forme principale, on est passé à une combinaison d’accueils physique, numérique, accompagné et itinérant, où l’innovation publique consiste à adapter les modes d’accès aux besoins réels des usagers et aux contraintes des territoires.</p><a class='cta' href='#boussole'>Entrer dans la note →</a></div></section>
+<div class='navwrap'><div class='navinner'><nav class='topnav'><a href='#acte1' class='primary'>Maillage et accueil</a><a href='#acte2'>Le guichet sous tension</a><a href='#acte3'>Proximité multimodale</a><a href='#perspectives'>Perspectives</a><a href='#bibliographie'>Bibliographie</a></nav><div class='progress'><div class='step active'><i class='dot'></i><span>Ancrer</span></div><span class='arrow'>→</span><div class='step'><i class='dot'></i><span>Dématérialiser</span></div><span class='arrow'>→</span><div class='step'><i class='dot'></i><span>Réinventer</span></div></div></div></div>
+<section class='boussole' id='boussole'><div class='b-head'><h2>Comment la présence de l’État se transforme</h2><p>La note s’organise en trois temps : un maillage préfectoral et sous-préfectoral, une mise sous tension du guichet, puis une réinvention de la proximité par l’accompagnement et l’aller-vers.</p></div><div class='b-track'><div class='circle-card'><div class='circle blue'><div><h3>Le maillage préfectoral et sous-préfectoral</h3><p>Le maillage préfectoral et sous-préfectoral donne à l’État une capacité d’ancrage, de coordination et d’accueil.</p></div></div><div class='tags'><span>préfectures</span><span>sous-préfectures</span><span>guichet</span><span>proximité</span></div></div><div class='circle-card'><div class='circle teal c2'><div><h3>Le guichet sous tension</h3><p>La numérisation transforme les parcours administratifs et fait apparaître de nouveaux besoins d’accompagnement.</p></div></div><div class='tags'><span>simplification</span><span>rationalisation</span><span>téléprocédures</span><span>stabilisation</span></div></div><div class='circle-card'><div class='circle orange c3'><div><h3>La proximité devient multimodale</h3><p>L’accueil peut désormais être physique, numérique, téléphonique, fixe, itinérant ou accompagné.</p></div></div><div class='tags'><span>France services</span><span>accompagnement</span><span>bus</span><span>aller-vers</span></div></div></div></section>
+<section class='section' id='acte1'><div class='sidecar'><aside class='textcol'><div class='act-label'>Acte 1 · Maillage et accueil</div><h2>Avant d’être un service, la proximité est une géographie</h2><p>Les préfectures de département et les sous-préfectures d’arrondissement forment l’armature territoriale historique de l’État. Ce réseau ne se réduit pas à une carte administrative : il organise des lieux d’accueil, d’orientation et de relation avec les usagers.</p><p>À l’échelle nationale, y compris ultramarine, ce maillage donne à voir une ambition ancienne : rapprocher l’action publique des territoires, en inscrivant l’État dans des lieux identifiables.</p><p>La proximité tient aussi à la capacité de l’État à coordonner, dans un territoire donné, des administrations, des compétences et des réponses concrètes au plus près des habitants.</p><p class='source'>Ces cartes ont été réalisées avec l’application Ma Carte de l’IGN.</p></aside><div class='visual'><div class='mapstage'><img src='assets/img/carte-monde-avec-la-france-et.webp' alt='Carte monde avec la France et les Outre-mer' class='m1'/><img src='assets/img/carte-france-prefectures.webp' alt='France hexagonale et Corse' class='m2'/><img src='assets/img/carte-france-prefectures.webp' alt='France hexagonale, vue resserrée' class='m3'/></div><div class='legendrow'><div class='legend'><i class='leg1'></i>Préfectures — chefs-lieux de départements</div><div class='legend'><i class='leg2'></i>Sous-préfectures — chefs-lieux d’arrondissements</div></div></div></div></section>
+<section class='section alt'><div class='sidecar'><aside class='textcol'><div class='act-label'>Acte 1 · Maillage et accueil</div><h2>Une administration territoriale pour relier politiques publiques et territoires</h2><p>Autour du préfet s’organise une part essentielle de l’administration territoriale de l’État. Ce réseau relie les politiques publiques nationales à leur mise en œuvre locale : sécurité publique, titres, cohésion sociale, environnement, emploi, logement, agriculture, aménagement ou gestion de crise.</p><p>La proximité ne tient donc pas seulement à la distance entre l’usager et un guichet. Elle tient aussi à la capacité de l’État à coordonner, dans un territoire donné, des administrations, des compétences et des réponses concrètes au plus près des habitants.</p></aside><div class='visual atebox'><img src='assets/img/schema-de-ladministration-territoriale-de-letat.webp' alt='Schéma de l’administration territoriale de l’État'/><div class='floatpills'><span>Préfet / préfecture</span><span>Services déconcentrés</span><span>Coordination</span><span>Réponses aux usagers</span></div></div></div></section>
+<section class='section'><div class='sidecar'><aside class='textcol'><div class='act-label'>Acte 1 · Maillage et accueil</div><h2>La contribution de ce maillage territorial à la construction de la ville dense, organisée autour de centralités</h2><p>Dans de nombreuses villes françaises, les bâtiments préfectoraux et sous-préfectoraux occupent des positions centrales, proches des places, des rues commerçantes, des équipements publics et des lieux de représentation.</p><p>Cette implantation prolonge une caractéristique forte de la ville européenne : la concentration, dans un espace dense, de fonctions politiques, administratives, économiques et sociales. L’accueil des usagers s’est longtemps inscrit dans cette géographie de la centralité.</p><p class='source'>Exemple : la sous-préfecture de Montluçon, de la vue aérienne à la place.</p><div class='quoteBox benevoloBox'>L’architecte Benevolo a montré plusieurs innovations majeures de la ville européenne du Moyen Âge qui sont demeurées : la formation de rues et de places par le rapprochement de bâtiments publics et privés qui créent un espace public où se reconnaissent les habitants ; la complexité des différents pouvoirs qui se côtoient et se manifestent dans les édifices et les différents quartiers qui se forment ; la fermeture de la ville par des murailles et des portes et la concentration des fonctions.</div><p class='refBox'><span class='refLabel'>Référence</span>Patrick Le Galès, <a href='https://uspc-upde.primo.exlibrisgroup.com/nde/fulldisplay?vid=33USPC_UPDE%3ANDE&amp;tab=Tout&amp;search_scope=Everything&amp;mode=basic&amp;displayMode=full&amp;bulkSize=10&amp;highlight=true&amp;dum=true&amp;query=Du+gouvernement+des+villes+%C3%A0+la+gouvernance+urbaine+&amp;displayField=all&amp;pcAvailabiltyMode=true&amp;docid=alma991009116239105806&amp;adaptor=Local+Search+Engine&amp;context=L&amp;isFrbr=false&amp;isHighlightedRecord=false&amp;state=&amp;lang=fr' target='_blank' rel='noopener noreferrer'><cite>Le retour des villes européennes. Sociétés urbaines, mondialisation, gouvernement et gouvernance</cite></a>, Paris, Presses de Sciences Po, 2011.</p></aside><div class='visual'><div class='plunge'><img src='assets/img/vue-aerienne-de-la-sous-prefecture.webp' alt='Vue aérienne de la sous-préfecture de Montluçon' class='aer'/><img src='assets/img/place-de-la-sous-prefecture-de.webp' alt='Place de la sous-préfecture de Montluçon' class='pla'/></div></div></div></section>
+<section class='section alt'><div class='sidecar'><aside class='textcol'><div class='act-label'>Acte 1 · Maillage et accueil</div><h2>Centralité dense, distances étalées</h2><p>Le contraste entre une ville européenne dense et une métropole américaine plus étalée permet de rendre visible une idée simple : la proximité administrative dépend aussi de la forme urbaine.</p><p>Dans la ville dense, les lieux de pouvoir, les services, les commerces et les espaces publics se concentrent autour de centralités anciennes. Dans des espaces plus étalés, l’accès aux services repose davantage sur la distance, les réseaux de transport et les mobilités individuelles.</p><p class='source'>Comparaison schématique : Paris / Los Angeles.</p></aside><div class='visual'><div class='compareTop'><div class='tag'>Paris · centralité dense</div><div class='vs'>VS</div><div class='tag'>Los Angeles · étalement et réseau viaire</div></div><div class='compare'><div><div class='cp large'><img src='assets/img/vue-aerienne-dense-de-paris.webp' alt='Vue aérienne dense de Paris'/></div></div><div><div class='cp med'><img src='assets/img/vue-generale-de-los-angeles.webp' alt='Vue générale de Los Angeles'/></div><div class='thumbs'><div class='cp small'><img src='assets/img/centre-administratif-de-los-angeles.webp' alt='Centre administratif de Los Angeles'/></div><div class='cp small'><img src='assets/img/detail-urbain-de-los-angeles.webp' alt='Détail urbain de Los Angeles'/></div></div></div></div></div></div></section>
+
+
+
+<section class='section perim-section'>
+  <div class='sidecar perimGrid'>
+    <aside class='textcol perimText'>
+      <div class='act-label'>Acte 1 · Maillage et accueil</div>
+      <h2>Un maillage sous-préfectoral en mouvement</h2>
+      <p>Le maillage territorial n’est pas immobile. Les périmètres des arrondissements peuvent être adaptés pour tenir compte de l’évolution démographique, des intercommunalités, des fusions de collectivités ou des besoins de rationalisation.</p>
+      <p>L’objectif n’est pas de supprimer la proximité, mais de rendre l’organisation administrative plus lisible : lorsqu’un même territoire intercommunal est éclaté entre plusieurs arrondissements, le rattachement peut être réajusté.</p>
+      <p>La carte administrative devient alors un instrument d’adaptation : elle cherche à mieux faire correspondre le périmètre de décision, le territoire vécu et les lieux où les usagers accèdent aux services.</p>
+    </aside>
+
+    <div class='visual perimVisual'>
+      <div class='perimHeader'>
+        <div>
+          <div class='perimKicker'>Schéma simplifié</div>
+          <h3>Aligner les périmètres administratifs sur les territoires vécus</h3>
+        </div>
+        <p>Passer d’un territoire intercommunal fragmenté à un rattachement plus cohérent.</p>
+      </div>
+
+      <div class='perimDiagram'>
+        <article class='perimCard before'>
+          <span class='perimBadge'>Avant</span>
+          <h4>Un territoire vécu fragmenté</h4>
+          <div class='perimMap'>
+            <div class='epciShape'></div>
+            <div class='district districtA'>Arr. A</div>
+            <div class='district districtB'>Arr. B</div>
+            <div class='district districtC'>Arr. C</div>
+            <span class='mapDot d1'></span><span class='mapDot d2'></span><span class='mapDot d3'></span>
+            <span class='mapDot d4'></span><span class='mapDot d5'></span><span class='mapDot d6'></span>
+          </div>
+          <p>Un même ensemble intercommunal dépend de plusieurs arrondissements.</p>
+        </article>
+
+        <div class='perimArrow'>
+          <span>Réaffecter</span>
+          <strong>→</strong>
+          <small>vers l’arrondissement du siège de l’EPCI</small>
+        </div>
+
+        <article class='perimCard after'>
+          <span class='perimBadge'>Après</span>
+          <h4>Un rattachement plus lisible</h4>
+          <div class='perimMap unified'>
+            <div class='epciShape'></div>
+            <div class='district districtUnified'>Un même arrondissement</div>
+            <span class='mapDot d1'></span><span class='mapDot d2'></span><span class='mapDot d3'></span>
+            <span class='mapDot d4'></span><span class='mapDot d5'></span><span class='mapDot d6'></span>
+          </div>
+          <p>Les communes concernées relèvent d’un même périmètre administratif.</p>
+        </article>
+      </div>
+
+      <div class='perimBottomNote'>
+        <strong>À retenir :</strong> l’adaptation du maillage n’efface pas la proximité ; elle cherche à la rendre plus lisible et plus opératoire.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class='transition' id='acte2'><div class='transinner'><div class='tiny'>Transition · vers le guichet sous tension</div><h2>Le maillage reste un point d’appui, mais l’accueil se transforme</h2><p>La présence territoriale de l’État reste un point d’appui. Mais l’accueil des usagers se transforme lorsque les démarches quittent progressivement le guichet pour passer par les plateformes, les téléprocédures et les accès numériques.</p></div></section>
+
+<section class='section alt'>
+  <div class='sidecar wideVisual'>
+    <aside class='textcol'>
+      <div class='act-label'>Acte 2 · Le guichet sous tension</div>
+      <h2>Du maillage territorial à l’accueil des usagers : une proximité sous tension</h2>
+      <p>Pendant longtemps, la proximité administrative a pu se lire à travers un triptyque simple : un territoire maillé, un lieu d’accueil identifié, un usager qui se déplace vers le guichet.</p>
+      <p>Ce modèle n’a pas disparu, mais il a été déstabilisé. Les démarches se sont numérisées, les usages se sont diversifiés, les mobilités quotidiennes se sont transformées et les attentes d’accompagnement se sont accrues.</p>
+      <p>La mise sous tension du guichet ne signifie donc pas sa disparition. Elle révèle plutôt la nécessité de reconfigurer l’accès aux services et d’articuler autrement présence territoriale, interfaces numériques et déplacements des usagers.</p>
+    </aside>
+    <div class='visual tensionSimple'>
+      <div class='tensionHeader'><h3>Du modèle stable à la mise sous tension</h3><button id='tensionPause' type='button'>Pause</button></div>
+      <div class='tensionStage' id='tensionStageBox'>
+        <div class='stableModel'>
+          <h4>Modèle stable</h4>
+          <div class='stableGrid'>
+            <div><b>Territoire maillé</b><span>préfectures · sous-préfectures</span></div>
+            <div><b>Guichet identifié</b><span>lieu d’accueil</span></div>
+            <div><b>Usager</b><span>se déplace vers le service</span></div>
+          </div>
+        </div>
+        <div class='pressureModel'>
+          <h4>Mise sous tension</h4>
+          <div class='pressureWords'>
+            <span>Numérisation</span><span>Simplification</span><span>Rationalisation</span><span>Mobilités</span><span>Usages différenciés</span>
+          </div>
+        </div>
+      </div>
+      <p class='schemaRead'>Le schéma distingue clairement le socle historique de proximité et les dynamiques qui obligent à recomposer les parcours d’accès.</p>
+    </div>
+  </div>
+</section>
+
+<section class='section'>
+  <div class='sidecar'>
+    <aside class='textcol'>
+      <div class='act-label'>Acte 2 · Le guichet sous tension</div>
+      <h2>Pourquoi l’accueil des usagers se transforme</h2>
+      <p>L’accueil des usagers s’est transformé sous l’effet de plusieurs mouvements concomitants. D’un côté, la demande de simplification a encouragé le développement des démarches en ligne et la réorganisation des procédures, notamment avec le Plan préfectures nouvelle génération.</p>
+      <p>D’un autre côté, les modes de vie se sont diversifiés : mobilités quotidiennes, multi-appartenance territoriale, usages numériques inégaux, éloignement ressenti de certains centres de décision.</p>
+      <p>Il ne faut donc pas raconter cette évolution comme une chaîne causale unique. Elle résulte plutôt de plusieurs dynamiques qui se croisent : simplifier, numériser, réorganiser, mais aussi continuer à rejoindre des usagers dont les situations et les capacités d’accès sont très hétérogènes.</p>
+      
+    </aside>
+    <div class='visual timelineBoard'>
+      <div class='timelineShell'>
+        <div class='timelineHeader'>
+          <div>
+            <h3>Une transformation portée par plusieurs dynamiques</h3>
+            <p>La frise progresse de gauche à droite pour faire apparaître, sans les confondre, les principaux mouvements qui ont reconfiguré l’accueil.</p>
+          </div>
+          <div class='miniTag'>Lecture guidée · frise animée</div>
+        </div>
+        <div class='timelineTrack'>
+          <div class='milestone top'>
+            <div class='mileCard'>
+              <div class='mileYear'>Années 2010</div>
+              <h4>Réformes territoriales et modernisation</h4>
+              <p>La rationalisation de l’action publique et la recherche d’une meilleure lisibilité administrative modifient l’organisation des services.</p>
+              <div class='milePills'><span>réorganisation</span><span>mutualisation</span></div>
+            </div>
+            <div class='mileDot'></div>
+          </div>
+          <div class='milestone bottom'>
+            <div class='mileDot'></div>
+            <div class='mileCard'>
+              <div class='mileYear'>2016–2017</div>
+              <h4>PPNG</h4>
+              <p>Le Plan préfectures nouvelle génération réoriente une partie des activités préfectorales et accélère la bascule de certaines démarches.</p>
+              <div class='milePills'><span>titres</span><span>réorientation du guichet</span></div>
+            </div>
+          </div>
+          <div class='milestone top'>
+            <div class='mileCard'>
+              <div class='mileYear'>Fin des années 2010</div>
+              <h4>Montée des téléprocédures</h4>
+              <p>Les démarches en ligne se généralisent, avec l’idée de fluidifier les parcours, d’augmenter la disponibilité des services et de réduire les déplacements.</p>
+              <div class='milePills'><span>plateformes</span><span>accès à distance</span></div>
+            </div>
+            <div class='mileDot'></div>
+          </div>
+          <div class='milestone bottom'>
+            <div class='mileDot'></div>
+            <div class='mileCard'>
+              <div class='mileYear'>Début des années 2020</div>
+              <h4>Usages diversifiés et besoins d’appui</h4>
+              <p>La progression du numérique ne supprime ni les écarts d’autonomie, ni les contraintes de mobilité, ni les besoins d’accompagnement dans les démarches.</p>
+              <div class='milePills'><span>usages inégaux</span><span>accompagnement</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class='section alt'>
+  <div class='sidecar'>
+    <aside class='textcol'>
+      <div class='act-label'>Acte 2 · Le guichet sous tension</div>
+      <h2>Quand l’accès numérique ne suffit pas : le besoin d’accompagnement</h2>
+      <p>La dématérialisation a profondément modifié les conditions de l’accueil. Elle a permis à de nombreux usagers d’accéder plus rapidement à certaines démarches, mais elle a aussi rendu plus visibles les inégalités d’autonomie numérique et administrative.</p>
+      <p>Plusieurs sources administratives documentent ces difficultés : savoir trouver la bonne information, comprendre la procédure, disposer d’un équipement, maîtriser les identifiants, scanner un document, suivre un dossier ou obtenir une réponse en cas de blocage.</p>
+      <p>Dans ce contexte, les métiers de l’accueil se déplacent : ils ne consistent plus seulement à recevoir un usager au guichet, mais à l’aider à franchir les étapes d’une démarche, à prévenir le non-recours et à désamorcer les tensions que peuvent produire les situations d’incompréhension ou d’attente.</p>
+      
+    </aside>
+    <div class='visual chartDeck'>
+      <div class='chartShell'>
+        <div class='chartCard'>
+          <div class='chartTop'>
+            <div>
+              <h3>Des démarches en ligne de plus en plus fréquentes</h3>
+              <p>La tendance générale montre la progression des démarches administratives accomplies sur internet.</p>
+            </div>
+          </div>
+          <div class='barChartWrap'>
+            <div id='barChart' class='barGrid' aria-label='Taux de réponses positives concernant les démarches administratives accomplies sur internet'></div>
+            <div id='barTip' class='barTip'></div>
+          </div>
+          <div class='barSource'><strong>Source :</strong> Arcep, programme Société numérique de l’ANCT (Baromètre du numérique). Valeurs arrondies.</div>
+        </div>
+        <div class='chartCard'>
+          <div class='chartTop'>
+            <div>
+              <h3>L’autonomie ne suit pas toujours la numérisation</h3>
+              <p>Le graphique rappelle qu’une part importante des usagers a encore besoin d’aide pour accomplir ses démarches en ligne.</p>
+            </div>
+          </div>
+          <div class='pieGrid'>
+            <div class='pieWrap'>
+              <div class='pieChart' id='pieChart'>
+                <div class='pieCenter' id='pieCenter'><div><strong>49 %</strong><span>y parviennent seuls</span></div></div>
+              </div>
+            </div>
+            <div class='legendList' id='pieLegend'>
+              <div class='legendItem active' data-label='Y parviennent seuls' data-pct='49'><span class='legendSwatch' style='background:#6b8ce3'></span><div class='legendText'><strong>Y parviennent seuls</strong></div><div class='legendPct'>49</div></div>
+              <div class='legendItem' data-label='Besoin d’aide ponctuelle' data-pct='36'><span class='legendSwatch' style='background:#57b7c0'></span><div class='legendText'><strong>Besoin d’aide ponctuelle</strong></div><div class='legendPct'>36</div></div>
+              <div class='legendItem' data-label='N’y arrivent pas seuls' data-pct='8'><span class='legendSwatch' style='background:#f09c57'></span><div class='legendText'><strong>N’y arrivent pas seuls</strong></div><div class='legendPct'>8</div></div>
+              <div class='legendItem' data-label='Évitent les démarches en ligne' data-pct='7'><span class='legendSwatch' style='background:#c7d1e3'></span><div class='legendText'><strong>Évitent les démarches en ligne</strong></div><div class='legendPct'>7</div></div>
+            </div>
+          </div>
+          <div class='barSource'><strong>Source :</strong> enquête <em>Accès aux droits, 2024</em>. Champ : ensemble des enquêtés ayant répondu à la question sur la réalisation de démarches administratives en ligne.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class='transition' id='transition-proximite-multimodale'>
+  <div class='transinner'>
+    <div class='tiny'>Transition · vers l’accueil multimodal</div>
+    <h2>Le « dernier kilomètre » comme voie d’innovation en matière d’accueil multimodal</h2>
+    <p>Lorsque l’accès au service ne va plus de soi, la proximité doit être reconstruite : par l’accompagnement, par la médiation, par l’itinérance et par des formes d’accueil capables de rejoindre les usagers là où ils vivent.</p>
+  </div>
+</section>
+
+<section class='section' id='acte3'>
+  <div class='sidecar'>
+    <aside class='textcol'>
+      <div class='act-label'>Acte 3 · La réinvention de l’accueil</div>
+      <h2>L’efficacité de l’action publique à l’aune du dernier kilomètre</h2>
+      <p>La notion de dernier kilomètre de l’action publique désigne la capacité d’une politique publique ou d’un service public à atteindre effectivement les personnes auxquelles il s’adresse. Issue du vocabulaire logistique, elle a été popularisée par le Conseil d’État dans son étude annuelle 2023.</p>
+      <p>Appliquée à l’accueil des usagers, cette notion change le regard : il ne suffit pas que la démarche existe, ni même qu’elle soit accessible en ligne. Il faut encore que l’usager puisse la comprendre, l’accomplir et obtenir une réponse adaptée.</p>
+      <p>Au début des années 2020, cette exigence a contribué à redéfinir les formes de l’accueil : points d’accès numériques, médiation, accompagnement humain, guichets mutualisés France services, formation des conseillers et dispositifs mobiles.</p>
+      <p class='refBox'><span class='refLabel'>Référence</span>Conseil d’État, <a href='https://www.conseil-etat.fr/actualites/l-etude-sur-le-dernier-kilometre-de-l-action-publique-en-dessins' target='_blank' rel='noopener noreferrer'><cite>L’usager du premier au dernier kilomètre de l’action publique : un enjeu d’efficacité et une exigence démocratique</cite></a>, étude annuelle, 2023.</p>
+    </aside>
+    <div class='visual lastMileDeck'>
+      <div class='lmHead'>
+        <div>
+          <h3>Le « dernier kilomètre » comme clé de lecture de l’accueil</h3>
+          <p>La séquence visuelle part du rapport, resserre l’attention sur l’expression centrale, puis met en avant la définition du « dernier kilomètre » avant de faire apparaître les dessins du Conseil d’État.</p>
+        </div>
+        <div class='lmTools'>
+          <div class='miniTag'>Couverture et dessins du Conseil d’État</div>
+          <button class='lmPause' id='lmPauseBtn' type='button' aria-pressed='false'><span class='icon'>❚❚</span><span>Mettre en pause</span></button>
+        </div>
+      </div>
+      <div class='lastMileStage' id='lastMileStage'>
+        <div class='lmFrame lmCover'><img src='assets/img/couverture-de-letude-annuelle-2023-du.webp' alt='Couverture de l’étude annuelle 2023 du Conseil d’État sur le dernier kilomètre de l’action publique'></div>
+        <div class='lmFrame lmQuote'>
+          <div class='lmQuoteCard'>
+            <div class='tiny'>Définition mise en avant</div>
+            <blockquote>« elle désigne ici la capacité d’une politique publique ou d’un service public à atteindre effectivement les personnes auxquelles il s’adresse »</blockquote>
+            <p>L’enjeu n’est donc pas seulement de concevoir une mesure ou d’ouvrir une procédure, mais de faire en sorte qu’elle soit réellement atteignable, compréhensible et utilisable.</p>
+          </div>
+        </div>
+        <div class='lmFrame lmD1'><img src='assets/img/dessin-du-conseil-detat-presentant-trois.webp' alt='Dessin du Conseil d’État présentant trois axes pour remettre les usagers au cœur de l’action publique'></div>
+        <div class='lmFrame lmD2'><img src='assets/img/dessin-du-conseil-detat-intitule-la.webp' alt='Dessin du Conseil d’État intitulé La maison du service public'></div>
+      </div>
+      <div class='lmFooter'>
+        <div class='lmCredit'>Dessins d’Olivier Sampson pour le Conseil d’État.</div>
+        <a class='lmLink' href='https://www.conseil-etat.fr/actualites/l-etude-sur-le-dernier-kilometre-de-l-action-publique-en-dessins' target='_blank' rel='noopener noreferrer'>Voir la page du Conseil d’État ↗</a>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class='section alt' id='france-services'>
+  <div class='sidecar franceServicesView'>
+    <aside class='textcol'>
+      <div class='act-label'>Acte 3 · Proximité multimodale</div>
+      <h2>France services : organiser un parcours d’accès accompagné</h2>
+      <p>Les maisons France services incarnent une réponse concrète à cette nouvelle exigence de proximité. Elles rassemblent, dans un même lieu, plusieurs organismes publics et proposent un accompagnement humain pour les démarches du quotidien.</p>
+      <p>La proximité est désormais multimodale : elle peut être physique, numérique, téléphonique, fixe ou itinérante. Elle ne consiste plus seulement à rapprocher un bâtiment de l’usager, mais à organiser un parcours d’accès compréhensible, accompagné et sécurisé.</p>
+      <p>Dans cette recomposition, les préfectures et sous-préfectures restent des points d’appui : points d’accès numériques, formation des conseillers France services pour les titres sécurisés, labellisation de sous-préfectures et articulation avec les réseaux locaux.</p>
+    </aside>
+    <div class='fsVisualColumn'>
+      <div class='visual immersiveFranceServices'>
+        <iframe title='Immersion dans une France services' src='immersions/france-services.html'></iframe>
+        <div class='fsCtaRail'>
+          <button class='fsFullscreen' type='button' id='fsReplay'>Revoir l’immersion ↻</button>
+        </div>
+      </div>
+      <div class='fsPartners'>
+        <h3>Les partenaires France services</h3>
+        <p>La proximité repose sur un réseau d’opérateurs et de services mobilisables dans un même lieu.</p>
+        <img src='assets/img/logos-des-partenaires-france-services-allocations.webp' alt='Logos des partenaires France services : Allocations familiales, Assurance Maladie, Assurance retraite, Chèque énergie, Finances publiques, France Rénov, France Titres, France Travail, La Poste, Urssaf, MSA et Point-justice.'>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class='section alt deepfilm' id='guyane'>
+  <div class='sidecar'>
+    <aside class='textcol'>
+      <div class='act-label'>Acte 3 · L’aller vers</div>
+      <h2>La pirogue France services : rejoindre les usagers en empruntant le fleuve</h2>
+      <div class='deepfilmMeta'>
+        <span class='tag'>Camopi · Oyapock</span>
+        <span class='tag'>Immersion</span>
+      </div>
+      <p>La démarche d’« aller vers » tend à se rapprocher des usagers là où ils vivent. Pour reprendre l’analogie de la logistique du dernier kilomètre, cela revient à procéder à une forme de « livraison de l’action publique à domicile ».</p>
+      <p>En Guyane, cette logique prend une forme particulièrement concrète. La pirogue France services de l’Est guyanais navigue chaque mois plus d’une journée sur l’Oyapock pour rejoindre le village de Camopi, où vivent environ 700 habitants amérindiens oyampis.</p>
+      
+      
+    </aside>
+    <div class='visual deepfilmVisual'>
+      <iframe class='deepfilmFrame' title='La pirogue France services en Guyane' src='immersions/guyane.html' loading='lazy' allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section class='section deepfilm' id='maurienne'>
+  <div class='sidecar'>
+    <aside class='textcol'>
+      <div class='act-label'>Acte 3 · Services mobiles</div>
+      <h2>Les bus France services : une réelle capacité à s’adapter à la diversité des territoires</h2>
+      <div class='deepfilmMeta'>
+        <span class='tag'>Maurienne</span>
+        <span class='tag'>144 bus France services</span>
+      </div>
+      <p>Les bus France services donnent une traduction très concrète de l’« aller vers » dans les espaces de très faible densité. Ils prolongent la présence publique dans des territoires où les distances, la dispersion de l’habitat et la concentration des services dans les bourgs compliquent l’accès ordinaire aux démarches.</p>
+      <p>La Maurienne en offre une illustration forte. Le montage visuel part de l’image satellitaire, resserre progressivement l’échelle jusqu’au village, puis rejoint le véhicule et son intérieur pour montrer comment l’accompagnement administratif se rend physiquement disponible au plus près des habitants.</p>
+      <p>La séquence insiste sur l’adaptation : le service public ne se contente pas d’exister ; il s’équipe, se déplace et se reconfigure pour rejoindre les usagers dans des contextes territoriaux très différents.</p>
+      
+    </aside>
+    <div class='visual deepfilmVisual'>
+      <iframe class='deepfilmFrame' title='Les bus France services en Maurienne' src='immersions/maurienne.html' loading='lazy' allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+
+<section class='section alt perspectiveSection' id='perspectives'>
+  <div class='sidecar perspectiveWrap'>
+    <aside class='textcol'>
+      <div class='act-label'>Acte 4 · Perspectives</div>
+      <h2><span class="viewLabelTitle">Perspectives pour la proximité de l’action publique</span><span class="questionTitle">Demain, aller vers qui ?</span></h2>
+      <div class='deepfilmMeta'>
+        <span class='tag'>Vieillissement</span>
+        <span class='tag'>Proximité et réseau</span>
+      </div>
+      <p>La proximité de l’action publique devra aussi s’adapter aux transformations démographiques. Entre 2020 et 2030, la population des 75-84 ans devrait passer de 4,1 à 6,1 millions de personnes, soit une hausse de 49 % en dix ans. Cette progression annonce une forte augmentation des plus de 85 ans, pour lesquels le maintien à domicile constitue souvent une priorité.</p>
+      <p>Le « virage domiciliaire » devient donc un défi majeur : adapter les logements, accompagner la perte d’autonomie et imaginer de nouvelles formes de services publics capables d’aller davantage vers les habitants.</p>
+      <p>La proximité devra également tenir compte de territoires vécus plus complexes. Les vies quotidiennes se distribuent entre plusieurs espaces, plusieurs vitesses et plusieurs modes d’accès : marche, voiture, transports collectifs, services numériques, lieux de passage ou d’accompagnement.</p>
+      <p>Dans ces conditions, la proximité ne se réduit pas à une courte distance physique. Elle se décline au pluriel : proximité géographique, proximité d’usage, proximité relationnelle, proximité d’accompagnement. L’enjeu n’est pas de choisir entre présence locale et organisation en réseau, mais de les articuler.</p>
+      <div class='quoteBox vanierBox'>
+        <div class='quoteLabel'>Martin Vanier</div>
+        <p>« Le mythe consiste à laisser entendre que tout se joue par et dans les territoires, alors que ce sont les réseaux qui les assemblent, les innervent, les activent. »</p>
+      </div>
+      <p class='refBox'><span class='refLabel'>Référence</span>Martin Vanier, <a href='https://editionsatelier.com/boutique/brand/290-martin-vanier' target='_blank' rel='noopener noreferrer'><cite>En finir avec les idées fausses sur l’aménagement du territoire</cite></a>, Paris, Les Éditions de l’Atelier, 2026.</p>
+    </aside>
+    
+<div class='visual perspectiveVisual noSchemaVisual'>
+  <div class='futurePanel'>
+    <div class='futureEyebrow'>Perspective</div>
+    <h3>Présence locale et organisation en réseau</h3>
+    <p class='futureLead'>La proximité de demain ne reposera pas sur une seule forme d’accès. Elle combinera présence, accompagnement, mobilité et mise en réseau des ressources.</p>
+    <div class='futureGrid'>
+      <div class='futureItem'><span>1</span><strong>Vieillissement</strong><p>Le maintien à domicile impose des services plus mobiles, plus attentifs et davantage tournés vers l’accompagnement.</p></div>
+      <div class='futureItem'><span>2</span><strong>Territoires vécus</strong><p>Les parcours quotidiens se déploient à plusieurs échelles : proximité du voisinage, centralités locales, accès plus lointains.</p></div>
+      <div class='futureItem'><span>3</span><strong>Proximité plurielle</strong><p>Proximité géographique, d’usage, relationnelle et d’accompagnement doivent être articulées plutôt qu’opposées.</p></div>
+      <div class='futureItem'><span>4</span><strong>Réseaux</strong><p>Les réseaux permettent d’accéder à des ressources rares, à des services spécialisés et à des opportunités plus éloignées.</p></div>
+    </div>
+    <div class='futureQuote'>
+      <div class='quoteLabel'>Point d’attention</div>
+      <p>L’enjeu n’est pas de choisir entre présence locale et organisation en réseau, mais de les articuler pour rendre l’action publique plus accessible.</p>
+    </div>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<section class='biblio' id='bibliographie'>
+  <div class='biblioBox'>
+    <div class='act-label'>Pour aller plus loin</div>
+    <h2>Bibliographie</h2>
+    <p class='biblioLead'>Références mobilisées dans la note.</p>
+    <ul class='biblioList'>
+      <li>Conseil d’État, <a href='https://www.conseil-etat.fr/actualites/l-etude-sur-le-dernier-kilometre-de-l-action-publique-en-dessins' target='_blank' rel='noopener noreferrer'><cite>L’usager du premier au dernier kilomètre de l’action publique : un enjeu d’efficacité et une exigence démocratique</cite></a>, étude annuelle, 2023.</li>
+      <li>Patrick Le Galès, <a href='https://uspc-upde.primo.exlibrisgroup.com/nde/fulldisplay?vid=33USPC_UPDE%3ANDE&amp;tab=Tout&amp;search_scope=Everything&amp;mode=basic&amp;displayMode=full&amp;bulkSize=10&amp;highlight=true&amp;dum=true&amp;query=Du+gouvernement+des+villes+%C3%A0+la+gouvernance+urbaine+&amp;displayField=all&amp;pcAvailabiltyMode=true&amp;docid=alma991009116239105806&amp;adaptor=Local+Search+Engine&amp;context=L&amp;isFrbr=false&amp;isHighlightedRecord=false&amp;state=&amp;lang=fr' target='_blank' rel='noopener noreferrer'><cite>Le retour des villes européennes. Sociétés urbaines, mondialisation, gouvernement et gouvernance</cite></a>, Paris, Presses de Sciences Po, 2011.</li>
+      <li>Martin Vanier, <a href='https://editionsatelier.com/boutique/brand/290-martin-vanier' target='_blank' rel='noopener noreferrer'><cite>En finir avec les idées fausses sur l’aménagement du territoire</cite></a>, Paris, Les Éditions de l’Atelier, 2026.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+<script>
+(function(){
+  const data = [
+    {year:'2007', value:37}, {year:'2008', value:38}, {year:'2009', value:41}, {year:'2010', value:44},
+    {year:'2011', value:47}, {year:'2012', value:47}, {year:'2013', value:51}, {year:'2014', value:51},
+    {year:'2015', value:53}, {year:'2016', value:60}, {year:'2017', value:66}, {year:'2018', value:63},
+    {year:'2019', value:64}, {year:'2020', value:72}, {year:'2022', value:68}, {year:'2024', value:71},
+    {year:'2025', value:69}
+  ];
+  const wrap = document.getElementById('barChart');
+  const tip = document.getElementById('barTip');
+  if(wrap){
+    data.forEach(d => {
+      const g = document.createElement('div');
+      g.className = 'barGroup';
+      const b = document.createElement('div');
+      b.className = 'bar';
+      b.style.height = (d.value/80*100) + '%';
+      b.setAttribute('tabindex','0');
+      const l = document.createElement('div');
+      l.className = 'barLabel';
+      l.textContent = d.year;
+      const show = (e) => {
+        const rect = wrap.getBoundingClientRect();
+        const r2 = b.getBoundingClientRect();
+        tip.style.left = ((r2.left + r2.width/2) - rect.left) + 'px';
+        tip.style.top = (r2.top - rect.top) + 'px';
+        tip.innerHTML = '<strong>' + d.year + '</strong><br>≈ ' + d.value + ' % des répondants';
+        tip.classList.add('show');
+      };
+      const hide = () => tip.classList.remove('show');
+      b.addEventListener('mouseenter', show);
+      b.addEventListener('mousemove', show);
+      b.addEventListener('mouseleave', hide);
+      b.addEventListener('focus', show);
+      b.addEventListener('blur', hide);
+      g.appendChild(b); g.appendChild(l); wrap.appendChild(g);
+    });
+  }
+
+  const legendItems = Array.from(document.querySelectorAll('#pieLegend .legendItem'));
+  const center = document.getElementById('pieCenter');
+  legendItems.forEach(item => {
+    item.addEventListener('click', () => {
+      legendItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      center.innerHTML = '<div><strong>' + item.dataset.pct + ' %</strong><span>' + item.dataset.label + '</span></div>';
+    });
+  });
+
+  const fsReplay = document.getElementById('fsReplay');
+  const fsFrame = document.querySelector('.immersiveFranceServices iframe');
+  if(fsReplay && fsFrame){
+    fsReplay.addEventListener('click', () => { fsFrame.src = fsFrame.getAttribute('src'); });
+  }
+
+  const lmStage = document.getElementById('lastMileStage');
+  const lmPauseBtn = document.getElementById('lmPauseBtn');
+  if(lmStage && lmPauseBtn){
+    lmPauseBtn.addEventListener('click', () => {
+      const paused = lmStage.classList.toggle('paused');
+      lmPauseBtn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+      lmPauseBtn.innerHTML = paused ? '<span class="icon">▶</span><span>Relancer l’animation</span>' : '<span class="icon">❚❚</span><span>Mettre en pause</span>';
+    });
+  }
+})();
+</script>
+
+
+<script>
+(function(){
+  const btn=document.getElementById('tensionPause');
+  const stage=document.getElementById('tensionStageBox');
+  if(btn && stage){
+    let paused=false;
+    btn.addEventListener('click',()=>{
+      paused=!paused;
+      stage.style.opacity=paused ? '.68' : '1';
+      btn.textContent=paused ? 'Lecture' : 'Pause';
+    });
+  }
+})();
+</script>
+
+</body></html>
